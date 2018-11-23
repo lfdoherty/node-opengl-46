@@ -186,6 +186,17 @@ NAN_METHOD(FramebufferTextureLayer);
 NAN_METHOD(CopyBufferSubData);
 NAN_METHOD(ClearBufferfv);
 NAN_METHOD(ReadBuffer);
+NAN_METHOD(VertexAttribIPointer);
+
+//Start of OpenGL 4.6 methods
+NAN_METHOD(BindImageTexture);
+NAN_METHOD(DispatchCompute);
+NAN_METHOD(DispatchComputeGroupSize);
+NAN_METHOD(MemoryBarrier);
+NAN_METHOD(ClearTexImage);
+NAN_METHOD(ClearBufferSubData);
+NAN_METHOD(CopyImageSubData);
+
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 }
 

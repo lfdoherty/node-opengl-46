@@ -2221,9 +2221,41 @@ NAN_METHOD(ClearBufferfv) {
     return;
   }
 
-  cout<<"srcOffset:"<<srcOffset<<endl;
-  cout<<"num:"<<num<<endl;
+ // cout<<"srcOffset:"<<srcOffset<<endl;
+ // cout<<"num:"<<num<<endl;
   glClearBufferfv(buffer, drawBuffer, ptr);
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+
+}
+NAN_METHOD(ClearBufferSubData) {
+  Nan::HandleScope scope;
+
+  //readTarget, writeTarget, readOffset, writeOffset, size
+  GLenum target = info[0]->Int32Value();
+  GLenum internalFormat = info[1]->Int32Value();
+  GLint offset = info[2]->Int32Value();
+  GLint clearSize = info[3]->Int32Value();
+  GLenum format = info[4]->Int32Value();
+  GLenum type = info[5]->Int32Value();
+
+  cout<<"target:"<<target<<endl;
+  cout<<"internalFormat:"<<internalFormat<<endl;
+  cout<<"offset:"<<offset<<endl;
+  cout<<"clearSize:"<<clearSize<<endl;
+  cout<<"format:"<<format<<endl;
+  cout<<"type:"<<type<<endl;
+
+  //int num;
+  //void* ptr = getArrayData<BYTE>(info[6],&num);
+  int element_size = 1;
+  Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[6]);
+  int size = arr->ByteLength() * element_size;
+  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+
+  cout<<"size:"<<size<<endl;
+
+  glClearBufferSubData(target, internalFormat, offset, clearSize, format, type, data);
 
   info.GetReturnValue().Set(Nan::Undefined());  
 
@@ -2234,6 +2266,111 @@ NAN_METHOD(ReadBuffer) {
 
   glReadBuffer(src);
   
+  info.GetReturnValue().Set(Nan::Undefined());    
+}
+NAN_METHOD(VertexAttribIPointer) {
+  Nan::HandleScope scope;
+
+  int indx = info[0]->Int32Value();
+  int size = info[1]->Int32Value();
+  int type = info[2]->Int32Value();
+  int stride = info[3]->Int32Value();
+  long offset = info[4]->Int32Value();
+
+  //    printf("VertexAttribPointer %d %d %d %d %d %d\n", indx, size, type, normalized, stride, offset);
+  glVertexAttribIPointer(indx, size, type, stride, (const GLvoid *)offset);
+
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+//START OF OpenGL 4.6 functions
+NAN_METHOD(BindImageTexture) {
+  Nan::HandleScope scope;
+  GLuint unit = info[0]->Int32Value();
+  GLuint texture = info[1]->Int32Value();
+  GLint level = info[2]->Int32Value();
+  GLboolean layered = info[3]->BooleanValue();
+  GLint layer = info[4]->Int32Value();
+  GLenum access = info[5]->Int32Value();
+  GLenum format = info[6]->Int32Value();
+
+  glBindImageTexture(unit, texture, level, layered, layer, access, format);
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+}
+NAN_METHOD(DispatchCompute) {
+  Nan::HandleScope scope;
+  GLuint sx = info[0]->Int32Value();
+  GLuint sy = info[1]->Int32Value();
+  GLuint sz = info[2]->Int32Value();
+
+  glDispatchCompute(sx, sy, sz);
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+
+}
+NAN_METHOD(DispatchComputeGroupSize) {
+  Nan::HandleScope scope;
+  GLuint sx = info[0]->Int32Value();
+  GLuint sy = info[1]->Int32Value();
+  GLuint sz = info[2]->Int32Value();
+
+  GLuint wx = info[3]->Int32Value();
+  GLuint wy = info[4]->Int32Value();
+  GLuint wz = info[5]->Int32Value();
+
+  glDispatchComputeGroupSizeARB(sx, sy, sz, wx, wy, wz);
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+
+}
+NAN_METHOD(MemoryBarrier) {
+  Nan::HandleScope scope;
+  GLuint bits = info[0]->Int32Value();
+
+  glMemoryBarrier(bits);
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+
+}
+NAN_METHOD(ClearTexImage){
+  Nan::HandleScope scope;
+  GLuint tex = info[0]->Int32Value();
+  GLuint level = info[1]->Int32Value();
+  GLenum format = info[2]->Int32Value();
+  GLenum type = info[3]->Int32Value();
+  //GLenum data = info[0]->Int32Value();
+  int dataSize;
+  void* data = getImageData(info[4], dataSize);
+
+  //glMemoryBarrier(bits);
+  glClearTexImage(tex, level, format, type, data);
+
+  info.GetReturnValue().Set(Nan::Undefined());    
+}
+NAN_METHOD(CopyImageSubData){
+  Nan::HandleScope scope;
+  GLuint srcTex = info[0]->Int32Value();
+  GLenum srcTarget = info[1]->Int32Value();
+  GLuint srcLevel = info[2]->Int32Value();
+  GLuint srcX = info[3]->Int32Value();
+  GLuint srcY = info[4]->Int32Value();
+  GLuint srcZ = info[5]->Int32Value();
+
+  GLuint dstTex = info[6]->Int32Value();
+  GLenum dstTarget = info[7]->Int32Value();
+  GLuint dstLevel = info[8]->Int32Value();
+  GLuint dstX = info[9]->Int32Value();
+  GLuint dstY = info[10]->Int32Value();
+  GLuint dstZ = info[11]->Int32Value();
+
+  GLuint sizeX = info[12]->Int32Value();
+  GLuint sizeY = info[13]->Int32Value();
+  GLuint sizeZ = info[14]->Int32Value();
+
+  
+  glCopyImageSubData(srcTex, srcTarget, srcLevel, srcX, srcY, srcZ, dstTex, dstTarget, dstLevel, dstX, dstY, dstZ, sizeX, sizeY, sizeZ);
+
   info.GetReturnValue().Set(Nan::Undefined());    
 }
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/

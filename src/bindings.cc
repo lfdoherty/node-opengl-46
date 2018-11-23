@@ -201,6 +201,16 @@ void init(Handle<Object> target)
   Nan::SetMethod(target, "copyBufferSubData", webgl::CopyBufferSubData);
   Nan::SetMethod(target, "clearBufferfv", webgl::ClearBufferfv);
   Nan::SetMethod(target, "readBuffer", webgl::ReadBuffer);
+Nan::SetMethod(target, "vertexAttribIPointer", webgl::VertexAttribIPointer);
+
+//START OF OpenGL 4.6 commands
+Nan::SetMethod(target, "bindImageTexture", webgl::BindImageTexture);
+Nan::SetMethod(target, "dispatchCompute", webgl::DispatchCompute);
+Nan::SetMethod(target, "dispatchComputeGroupSize", webgl::DispatchComputeGroupSize);
+Nan::SetMethod(target, "memoryBarrier", webgl::MemoryBarrier);
+Nan::SetMethod(target, "clearTexImage", webgl::ClearTexImage);
+Nan::SetMethod(target, "clearBufferSubData", webgl::ClearBufferSubData);
+Nan::SetMethod(target, "copyImageSubData", webgl::CopyImageSubData);
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 
   // OpenGL ES 2.1 constants
