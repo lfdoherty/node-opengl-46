@@ -707,7 +707,7 @@ NAN_METHOD(CreateBuffer) {
   Nan::HandleScope scope;
 
   GLuint buffer;
-  glGenBuffers(1, &buffer);
+  glCreateBuffers(1, &buffer);
   #ifdef LOGGING
   cout<<"createBuffer "<<buffer<<endl;
   #endif
@@ -730,7 +730,7 @@ NAN_METHOD(CreateFramebuffer) {
   Nan::HandleScope scope;
 
   GLuint buffer;
-  glGenFramebuffers(1, &buffer);
+  glCreateFramebuffers(1, &buffer);
   #ifdef LOGGING
   cout<<"createFrameBuffer "<<buffer<<endl;
   #endif
@@ -1249,7 +1249,7 @@ NAN_METHOD(CreateRenderbuffer) {
   Nan::HandleScope scope;
 
   GLuint renderbuffers;
-  glGenRenderbuffers(1,&renderbuffers);
+  glCreateRenderbuffers(1,&renderbuffers);
   #ifdef LOGGING
   cout<<"createRenderBuffer "<<renderbuffers<<endl;
   #endif
@@ -1262,6 +1262,7 @@ NAN_METHOD(DeleteBuffer) {
 
   GLuint buffer = info[0]->Uint32Value();
 
+  //cout<<"deleteBuffer:"<<buffer<<endl;
   glDeleteBuffers(1,&buffer);
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -1902,7 +1903,7 @@ NAN_METHOD(CreateSampler) {
   Nan::HandleScope scope;
 
   GLuint sampler;
-  glGenSamplers(1, &sampler);
+  glCreateSamplers(1, &sampler);
   #ifdef LOGGING
   cout<<"createSampler "<<sampler<<endl;
   #endif
@@ -2019,7 +2020,7 @@ NAN_METHOD(CreateTransformFeedback) {
   Nan::HandleScope scope;
 
   GLuint tf;
-  glGenTransformFeedbacks(1, &tf);
+  glCreateTransformFeedbacks(1, &tf);
   #ifdef LOGGING
   cout<<"createTransformFeedback "<<tf<<endl;
   #endif
@@ -2228,6 +2229,68 @@ NAN_METHOD(ClearBufferfv) {
   info.GetReturnValue().Set(Nan::Undefined());  
 
 }
+NAN_METHOD(ClearBufferData) {
+  Nan::HandleScope scope;
+
+  //readTarget, writeTarget, readOffset, writeOffset, size
+  GLenum target = info[0]->Int32Value();
+  GLenum internalFormat = info[1]->Int32Value();
+  GLenum format = info[2]->Int32Value();
+  GLenum type = info[3]->Int32Value();
+/*
+  cout<<"target:"<<target<<endl;
+  cout<<"internalFormat:"<<internalFormat<<endl;
+  //cout<<"offset:"<<offset<<endl;
+  //cout<<"clearSize:"<<clearSize<<endl;
+  cout<<"format:"<<format<<endl;
+  cout<<"type:"<<type<<endl;
+*/
+  Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[4]);
+  int size = arr->ByteLength();
+  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+
+  //cout<<"size:"<<size<<endl;
+ // cout<<"is null"<<info[4]->IsNull()<<endl;
+
+  glClearBufferData(target, internalFormat, format, type, data);
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+
+}
+NAN_METHOD(ClearNamedBufferData) {
+  Nan::HandleScope scope;
+
+  //readTarget, writeTarget, readOffset, writeOffset, size
+  int buf = info[0]->Int32Value();
+  GLenum internalFormat = info[1]->Int32Value();
+  GLenum format = info[2]->Int32Value();
+  GLenum type = info[3]->Int32Value();
+
+  //cout<<"target:"<<target<<endl;
+ // cout<<"buf:"<<buf<<endl;
+ // cout<<"internalFormat:"<<internalFormat<<endl;
+  //cout<<"offset:"<<offset<<endl;
+  //cout<<"clearSize:"<<clearSize<<endl;
+ // cout<<"format:"<<format<<endl;
+ // cout<<"type:"<<type<<endl;
+
+  if(info[4]->IsNull()){
+   // cout<<"is null"<<endl;
+    glClearNamedBufferData(buf, internalFormat, format, type, NULL);
+  }else{
+    Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[4]);
+    int size = arr->ByteLength();
+    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+
+   // cout<<"size:"<<size<<endl;
+    //cout<<"is null"<<info[4]->IsNull()<<endl;
+
+    glClearNamedBufferData(buf, internalFormat, format, type, data);
+  }
+
+  info.GetReturnValue().Set(Nan::Undefined());  
+
+}
 NAN_METHOD(ClearBufferSubData) {
   Nan::HandleScope scope;
 
@@ -2372,6 +2435,152 @@ NAN_METHOD(CopyImageSubData){
   glCopyImageSubData(srcTex, srcTarget, srcLevel, srcX, srcY, srcZ, dstTex, dstTarget, dstLevel, dstX, dstY, dstZ, sizeX, sizeY, sizeZ);
 
   info.GetReturnValue().Set(Nan::Undefined());    
+}
+NAN_METHOD(GetTextureImage){
+  Nan::HandleScope scope;
+ 
+  GLuint tex = info[0]->Int32Value();
+  GLint level = info[1]->Int32Value();
+  GLenum format = info[2]->Int32Value();
+  GLenum type = info[3]->Int32Value();
+  GLint bufSize = info[4]->Int32Value();
+
+  if (!info[5]->IsNull()) {
+    Local<Object> obj = Local<Object>::Cast(info[5]);
+    if (!obj->IsObject()){
+      GLint offset = info[5]->Int32Value();
+      glGetTextureImage(tex, level, format, type, bufSize, (void*) offset);
+      //glReadPixels(x, y, width, height, format, type, (void*)offset);
+
+      info.GetReturnValue().Set(Nan::Undefined());
+      return;
+    }
+  }
+
+  int dataSize;
+  void *pixels=getImageData(info[5], dataSize);
+  
+  glGetTextureImage(tex, level, format, type, bufSize, pixels);
+
+  info.GetReturnValue().Set(Nan::Undefined());    
+}
+NAN_METHOD(BufferStorage){
+  Nan::HandleScope scope;
+
+  GLenum target = info[0]->Int32Value();
+  GLint byteSize = info[1]->Int32Value();
+  GLbitfield flags = info[3]->Int32Value();
+
+  /*if (info[2]->IsNull()) {
+    glBufferStorage(target, byteSize, NULL, flags);
+    cout << "null buffer storage\n";
+  }else{*/
+
+  if(info[2]->IsObject()) {
+
+    //cout << "null buffer storage? " << info[2]->IsNull() << "\n";
+
+    Local<Object> obj = Local<Object>::Cast(info[2]);
+    Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(obj);
+    int size = byteSize==0?(arr->ByteLength()):byteSize;
+    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+
+    glBufferStorage(target, size, data, flags);
+    //cout << "data buffer storage\n";
+  }else{
+    glBufferStorage(target, byteSize, NULL, flags);
+    //cout << "null buffer storage\n";
+  } 
+  info.GetReturnValue().Set(Nan::Undefined());    
+  
+}
+
+NAN_METHOD(NamedBufferStorage){
+  Nan::HandleScope scope;
+
+  int buf = info[0]->Int32Value();
+  GLint byteSize = info[1]->Int32Value();
+  GLbitfield flags = info[3]->Int32Value();
+
+  /*if (info[2]->IsNull()) {
+    glBufferStorage(target, byteSize, NULL, flags);
+    cout << "null buffer storage\n";
+  }else{*/
+
+  if(info[2]->IsObject()) {
+
+    //cout << "null buffer storage? " << info[2]->IsNull() << "\n";
+
+    Local<Object> obj = Local<Object>::Cast(info[2]);
+    Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(obj);
+    int size = byteSize==0?(arr->ByteLength()):byteSize;
+    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+
+    glNamedBufferStorage(buf, size, data, flags);
+    //cout << "data buffer storage\n";
+  }else{
+    glNamedBufferStorage(buf, byteSize, NULL, flags);
+    //cout << "null buffer storage "<<byteSize<<" "<<flags<<endl;
+  } 
+  info.GetReturnValue().Set(Nan::Undefined());    
+  
+}
+
+NAN_METHOD(GetNamedBufferSubData) {
+  Nan::HandleScope scope;
+
+  int buf = info[0]->Int32Value();
+  GLint srcByteOffset = info[1]->Int32Value();
+  
+  GLsizei dataSizeBytes = -1;
+  void* data = getImageData(info[2], dataSizeBytes);
+  
+  GLsizei dstOffset = info[3]->Int32Value();
+  GLsizei length = info[4]->Int32Value();
+
+  
+  GLsizei remainingBytes = dataSizeBytes - dstOffset;
+  if(length != 0){
+    remainingBytes = length;
+  }
+  if(dstOffset != 0){
+    data = (void*)(((char*)data)+dstOffset);
+  
+  }
+/*
+  cout<<"buf:"<<buf<<endl;
+  cout<<"srcByteOffset:"<<srcByteOffset<<endl;
+  cout<<"dstOffset:"<<dstOffset<<endl;
+  cout<<"remainingBytes:"<<remainingBytes<<endl;
+  cout<<"dataSizeBytes:"<<dataSizeBytes<<endl;
+*/
+  glGetNamedBufferSubData(buf, srcByteOffset, remainingBytes, data);
+
+  info.GetReturnValue().Set(Nan::Undefined());    
+}
+
+
+NAN_METHOD(NamedBufferSubData) {
+  Nan::HandleScope scope;
+
+  int buf = info[0]->Int32Value();
+  int offset = info[1]->Int32Value();
+  Local<Object> obj = Local<Object>::Cast(info[2]);
+  int srcOffsetBytes = info[3]->Int32Value();
+  int lengthBytes = info[4]->Int32Value();
+ // cout<<"offset:"<<offset<<endl;
+ // cout<<"srcOffsetBytes:"<<srcOffsetBytes<<endl;
+  //cout<<"lengthBytes:"<<lengthBytes<<endl;
+
+  Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(obj);
+  int size = lengthBytes==0?arr->ByteLength():lengthBytes;
+  //cout<<"size:"<<size<<endl;
+  //cout<<"bytelength:"<<arr->ByteLength()<<endl;
+  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset() + srcOffsetBytes;
+
+  glNamedBufferSubData(buf, offset, size, data);
+
+  info.GetReturnValue().Set(Nan::Undefined());
 }
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 

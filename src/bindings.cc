@@ -209,8 +209,15 @@ Nan::SetMethod(target, "dispatchCompute", webgl::DispatchCompute);
 Nan::SetMethod(target, "dispatchComputeGroupSize", webgl::DispatchComputeGroupSize);
 Nan::SetMethod(target, "memoryBarrier", webgl::MemoryBarrier);
 Nan::SetMethod(target, "clearTexImage", webgl::ClearTexImage);
+Nan::SetMethod(target, "clearBufferData", webgl::ClearBufferData);
+Nan::SetMethod(target, "clearNamedBufferData", webgl::ClearNamedBufferData);
 Nan::SetMethod(target, "clearBufferSubData", webgl::ClearBufferSubData);
 Nan::SetMethod(target, "copyImageSubData", webgl::CopyImageSubData);
+Nan::SetMethod(target, "getTextureImage", webgl::GetTextureImage);
+Nan::SetMethod(target, "bufferStorage", webgl::BufferStorage);
+Nan::SetMethod(target, "namedBufferStorage", webgl::NamedBufferStorage);
+Nan::SetMethod(target, "getNamedBufferSubData", webgl::GetNamedBufferSubData);
+Nan::SetMethod(target, "namedBufferSubData", webgl::NamedBufferSubData);
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 
   // OpenGL ES 2.1 constants

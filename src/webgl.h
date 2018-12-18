@@ -194,9 +194,15 @@ NAN_METHOD(DispatchCompute);
 NAN_METHOD(DispatchComputeGroupSize);
 NAN_METHOD(MemoryBarrier);
 NAN_METHOD(ClearTexImage);
+NAN_METHOD(ClearBufferData);
+NAN_METHOD(ClearNamedBufferData);
 NAN_METHOD(ClearBufferSubData);
 NAN_METHOD(CopyImageSubData);
-
+NAN_METHOD(GetTextureImage);
+NAN_METHOD(BufferStorage);
+NAN_METHOD(NamedBufferStorage);
+NAN_METHOD(GetNamedBufferSubData);
+NAN_METHOD(NamedBufferSubData);
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 }
 
