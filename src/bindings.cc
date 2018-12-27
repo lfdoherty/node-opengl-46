@@ -218,6 +218,8 @@ Nan::SetMethod(target, "bufferStorage", webgl::BufferStorage);
 Nan::SetMethod(target, "namedBufferStorage", webgl::NamedBufferStorage);
 Nan::SetMethod(target, "getNamedBufferSubData", webgl::GetNamedBufferSubData);
 Nan::SetMethod(target, "namedBufferSubData", webgl::NamedBufferSubData);
+Nan::SetMethod(target, "textureStorage2d", webgl::TextureStorage2D);
+Nan::SetMethod(target, "textureStorage3d", webgl::TextureStorage3D);
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 
   // OpenGL ES 2.1 constants

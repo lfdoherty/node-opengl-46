@@ -620,10 +620,13 @@ NAN_METHOD(Enable) {
 NAN_METHOD(CreateTexture) {
   Nan::HandleScope scope;
 
+  int typeTarget = info[0]->Int32Value();
+
+
   GLuint texture;
-  glGenTextures(1, &texture);
+  glCreateTextures(typeTarget, 1, &texture);
   #ifdef LOGGING
-  cout<<"createTexture "<<texture<<endl;
+  cout<<"createTexture "<<typeTarget<<" "<<texture<<endl;
   #endif
   registerGLObj(GLOBJECT_TYPE_TEXTURE, texture);
   info.GetReturnValue().Set(Nan::New<Number>(texture));
@@ -2579,6 +2582,35 @@ NAN_METHOD(NamedBufferSubData) {
   void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset() + srcOffsetBytes;
 
   glNamedBufferSubData(buf, offset, size, data);
+
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+NAN_METHOD(TextureStorage2D) {
+  Nan::HandleScope scope;
+
+  int tex = info[0]->Int32Value();
+  int levels = info[1]->Int32Value();
+  int internalFormat = info[2]->Int32Value();
+  int width = info[3]->Int32Value();
+  int height = info[4]->Int32Value();
+  
+
+  glTextureStorage2D(tex, levels, internalFormat, width, height);
+
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+NAN_METHOD(TextureStorage3D) {
+  Nan::HandleScope scope;
+
+  int tex = info[0]->Int32Value();
+  int levels = info[1]->Int32Value();
+  int internalFormat = info[2]->Int32Value();
+  int width = info[3]->Int32Value();
+  int height = info[4]->Int32Value();
+  int depth = info[5]->Int32Value();
+  
+
+  glTextureStorage3D(tex, levels, internalFormat, width, height, depth);
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
