@@ -205,6 +205,10 @@ NAN_METHOD(GetNamedBufferSubData);
 NAN_METHOD(NamedBufferSubData);
 NAN_METHOD(TextureStorage2D);
 NAN_METHOD(TextureStorage3D);
+NAN_METHOD(TextureSubImage2D);
+NAN_METHOD(TextureParameteri);
+NAN_METHOD(TextureParameterf);
+
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 }
 

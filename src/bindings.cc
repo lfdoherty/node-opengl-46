@@ -218,8 +218,13 @@ Nan::SetMethod(target, "bufferStorage", webgl::BufferStorage);
 Nan::SetMethod(target, "namedBufferStorage", webgl::NamedBufferStorage);
 Nan::SetMethod(target, "getNamedBufferSubData", webgl::GetNamedBufferSubData);
 Nan::SetMethod(target, "namedBufferSubData", webgl::NamedBufferSubData);
-Nan::SetMethod(target, "textureStorage2d", webgl::TextureStorage2D);
-Nan::SetMethod(target, "textureStorage3d", webgl::TextureStorage3D);
+Nan::SetMethod(target, "textureStorage2D", webgl::TextureStorage2D);
+Nan::SetMethod(target, "textureStorage3D", webgl::TextureStorage3D);
+Nan::SetMethod(target, "textureSubImage2D", webgl::TextureSubImage2D);
+
+Nan::SetMethod(target, "textureParameteri", webgl::TextureParameteri);
+Nan::SetMethod(target, "textureParameterf", webgl::TextureParameterf);
+  
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 
   // OpenGL ES 2.1 constants

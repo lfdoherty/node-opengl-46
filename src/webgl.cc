@@ -2614,6 +2614,50 @@ NAN_METHOD(TextureStorage3D) {
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
+
+NAN_METHOD(TextureSubImage2D) {
+  Nan::HandleScope scope;
+
+  int tex = info[0]->Int32Value();
+  GLint level = info[1]->Int32Value();
+  GLint xoffset = info[2]->Int32Value();
+  GLint yoffset = info[3]->Int32Value();
+  GLsizei width = info[4]->Int32Value();
+  GLsizei height = info[5]->Int32Value();
+  GLenum format = info[6]->Int32Value();
+  GLenum type = info[7]->Int32Value();
+  int dataSize;
+  void *pixels=getImageData(info[8], dataSize);
+
+  glTextureSubImage2D(tex, level, xoffset, yoffset, width, height, format, type, pixels);
+
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+NAN_METHOD(TextureParameteri) {
+  Nan::HandleScope scope;
+
+  int tex = info[0]->Int32Value();
+  int pname = info[1]->Int32Value();
+  int param = info[2]->Int32Value();
+
+  glTextureParameteri(tex, pname, param);
+
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+NAN_METHOD(TextureParameterf) {
+  Nan::HandleScope scope;
+
+  int tex = info[0]->Int32Value();
+  int pname = info[1]->Int32Value();
+  float param = info[2]->NumberValue();
+
+  glTextureParameterf(tex, pname, param);
+
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+
 /*** END OF NEW WRAPPERS ADDED BY LIAM ***/
 
 struct GLObj {
