@@ -10,7 +10,7 @@ using namespace node;
 
 class Image : public ObjectWrap {
 public:
-  static void Initialize (Handle<Object> target);
+  static void Initialize (Local<Object> target);
   static void AtExit();
   int GetWidth ();
   int GetHeight ();
