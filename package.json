@@ -2,7 +2,7 @@
   "author": "Mikael Bourges-Sevenier <mikeseven@gmail.com>, Liam Doherty",
   "name": "@lfdoherty/node-opengl-46",
   "description": "OpenGL 4.6 bindings for node, adapted from node-webgl",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "main": "index.js",
   "keywords": [
     "webgl",
