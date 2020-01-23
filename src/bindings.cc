@@ -21,7 +21,7 @@ v8::PropertyAttribute constant_attributes =
 #define JS_GL_CONSTANT(name) JS_GL_SET_CONSTANT(#name, GL_ ## name)
 
 extern "C" {
-void init(Handle<Object> target)
+void init(Local<Object> target)
 {
   atexit(webgl::AtExit);
   atexit(Image::AtExit);

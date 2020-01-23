@@ -111,8 +111,8 @@ NAN_METHOD(Init) {
 NAN_METHOD(Uniform1f) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
+  int location = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
 
   glUniform1f(location, x);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -121,9 +121,9 @@ NAN_METHOD(Uniform1f) {
 NAN_METHOD(Uniform2f) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
-  float y = (float) info[2]->NumberValue();
+  int location = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
+  float y = (float) Nan::To<double>(info[2]).FromJust();
 
   glUniform2f(location, x, y);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -132,10 +132,10 @@ NAN_METHOD(Uniform2f) {
 NAN_METHOD(Uniform3f) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
-  float y = (float) info[2]->NumberValue();
-  float z = (float) info[3]->NumberValue();
+  int location = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
+  float y = (float) Nan::To<double>(info[2]).FromJust();
+  float z = (float) Nan::To<double>(info[3]).FromJust();
 
   glUniform3f(location, x, y, z);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -144,11 +144,11 @@ NAN_METHOD(Uniform3f) {
 NAN_METHOD(Uniform4f) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
-  float y = (float) info[2]->NumberValue();
-  float z = (float) info[3]->NumberValue();
-  float w = (float) info[4]->NumberValue();
+  int location = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
+  float y = (float) Nan::To<double>(info[2]).FromJust();
+  float z = (float) Nan::To<double>(info[3]).FromJust();
+  float w = (float) Nan::To<double>(info[4]).FromJust();
 
   glUniform4f(location, x, y, z, w);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -157,8 +157,8 @@ NAN_METHOD(Uniform4f) {
 NAN_METHOD(Uniform1i) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  int x = info[1]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
+  int x = Nan::To<int>(info[1]).FromJust();
 
   glUniform1i(location, x);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -167,9 +167,9 @@ NAN_METHOD(Uniform1i) {
 NAN_METHOD(Uniform2i) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  int x = info[1]->Int32Value();
-  int y = info[2]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
+  int x = Nan::To<int>(info[1]).FromJust();
+  int y = Nan::To<int>(info[2]).FromJust();
 
   glUniform2i(location, x, y);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -178,10 +178,10 @@ NAN_METHOD(Uniform2i) {
 NAN_METHOD(Uniform3i) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  int x = info[1]->Int32Value();
-  int y = info[2]->Int32Value();
-  int z = info[3]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
+  int x = Nan::To<int>(info[1]).FromJust();
+  int y = Nan::To<int>(info[2]).FromJust();
+  int z = Nan::To<int>(info[3]).FromJust();
 
   glUniform3i(location, x, y, z);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -190,11 +190,11 @@ NAN_METHOD(Uniform3i) {
 NAN_METHOD(Uniform4i) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
-  int x = info[1]->Int32Value();
-  int y = info[2]->Int32Value();
-  int z = info[3]->Int32Value();
-  int w = info[4]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
+  int x = Nan::To<int>(info[1]).FromJust();
+  int y = Nan::To<int>(info[2]).FromJust();
+  int z = Nan::To<int>(info[3]).FromJust();
+  int w = Nan::To<int>(info[4]).FromJust();
 
   glUniform4i(location, x, y, z, w);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -203,7 +203,7 @@ NAN_METHOD(Uniform4i) {
 NAN_METHOD(Uniform1fv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLfloat *ptr=getArrayData<GLfloat>(info[1],&num);
   glUniform1fv(location, num, ptr);
@@ -213,7 +213,7 @@ NAN_METHOD(Uniform1fv) {
 NAN_METHOD(Uniform2fv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLfloat *ptr=getArrayData<GLfloat>(info[1],&num);
   num /= 2;
@@ -225,7 +225,7 @@ NAN_METHOD(Uniform2fv) {
 NAN_METHOD(Uniform3fv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLfloat *ptr=getArrayData<GLfloat>(info[1],&num);
   num /= 3;
@@ -237,7 +237,7 @@ NAN_METHOD(Uniform3fv) {
 NAN_METHOD(Uniform4fv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLfloat *ptr=getArrayData<GLfloat>(info[1],&num);
   num /= 4;
@@ -249,7 +249,7 @@ NAN_METHOD(Uniform4fv) {
 NAN_METHOD(Uniform1iv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLint *ptr=getArrayData<GLint>(info[1],&num);
 
@@ -260,7 +260,7 @@ NAN_METHOD(Uniform1iv) {
 NAN_METHOD(Uniform2iv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLint *ptr=getArrayData<GLint>(info[1],&num);
   num /= 2;
@@ -272,7 +272,7 @@ NAN_METHOD(Uniform2iv) {
 NAN_METHOD(Uniform3iv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLint *ptr=getArrayData<GLint>(info[1],&num);
   num /= 3;
@@ -283,7 +283,7 @@ NAN_METHOD(Uniform3iv) {
 NAN_METHOD(Uniform4iv) {
   Nan::HandleScope scope;
 
-  int location = info[0]->Int32Value();
+  int location = Nan::To<int>(info[0]).FromJust();
   int num=0;
   GLint *ptr=getArrayData<GLint>(info[1],&num);
   num /= 4;
@@ -294,8 +294,8 @@ NAN_METHOD(Uniform4iv) {
 NAN_METHOD(PixelStorei) {
   Nan::HandleScope scope;
 
-  int pname = info[0]->Int32Value();
-  int param = info[1]->Int32Value();
+  int pname = Nan::To<int>(info[0]).FromJust();
+  int param = Nan::To<int>(info[1]).FromJust();
 
   glPixelStorei(pname,param);
 
@@ -305,9 +305,9 @@ NAN_METHOD(PixelStorei) {
 NAN_METHOD(BindAttribLocation) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
-  int index = info[1]->Int32Value();
-  String::Utf8Value name(info[2]);
+  int program = Nan::To<int>(info[0]).FromJust();
+  int index = Nan::To<int>(info[1]).FromJust();
+  Nan::Utf8String name(info[2]);
 
   glBindAttribLocation(program, index, *name);
 
@@ -325,9 +325,9 @@ NAN_METHOD(GetError) {
 NAN_METHOD(DrawArrays) {
   Nan::HandleScope scope;
 
-  int mode = info[0]->Int32Value();
-  int first = info[1]->Int32Value();
-  int count = info[2]->Int32Value();
+  int mode = Nan::To<int>(info[0]).FromJust();
+  int first = Nan::To<int>(info[1]).FromJust();
+  int count = Nan::To<int>(info[2]).FromJust();
 
   glDrawArrays(mode, first, count);
 
@@ -337,8 +337,8 @@ NAN_METHOD(DrawArrays) {
 NAN_METHOD(UniformMatrix2fv) {
   Nan::HandleScope scope;
 
-  GLint location = info[0]->Int32Value();
-  GLboolean transpose = info[1]->BooleanValue();
+  GLint location = Nan::To<int>(info[0]).FromJust();
+  GLboolean transpose = Nan::To<bool>(info[1]).FromJust();
 
   GLsizei count=0;
   GLfloat* data=getArrayData<GLfloat>(info[2],&count);
@@ -355,8 +355,8 @@ NAN_METHOD(UniformMatrix2fv) {
 NAN_METHOD(UniformMatrix3fv) {
   Nan::HandleScope scope;
 
-  GLint location = info[0]->Int32Value();
-  GLboolean transpose = info[1]->BooleanValue();
+  GLint location = Nan::To<int>(info[0]).FromJust();
+  GLboolean transpose = Nan::To<bool>(info[1]).FromJust();
   GLsizei count=0;
   GLfloat* data=getArrayData<GLfloat>(info[2],&count);
 
@@ -371,8 +371,8 @@ NAN_METHOD(UniformMatrix3fv) {
 NAN_METHOD(UniformMatrix4fv) {
   Nan::HandleScope scope;
 
-  GLint location = info[0]->Int32Value();
-  GLboolean transpose = info[1]->BooleanValue();
+  GLint location = Nan::To<int>(info[0]).FromJust();
+  GLboolean transpose = Nan::To<bool>(info[1]).FromJust();
   GLsizei count=0;
   GLfloat* data=getArrayData<GLfloat>(info[2],&count);
 
@@ -387,7 +387,7 @@ NAN_METHOD(UniformMatrix4fv) {
 NAN_METHOD(GenerateMipmap) {
   Nan::HandleScope scope;
 
-  GLint target = info[0]->Int32Value();
+  GLint target = Nan::To<int>(info[0]).FromJust();
   glGenerateMipmap(target);
 
   info.GetReturnValue().Set(Nan::Undefined());
@@ -396,8 +396,8 @@ NAN_METHOD(GenerateMipmap) {
 NAN_METHOD(GetAttribLocation) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
-  String::Utf8Value name(info[1]);
+  int program = Nan::To<int>(info[0]).FromJust();
+  Nan::Utf8String name(info[1]);
 
   info.GetReturnValue().Set(Nan::New<Number>(glGetAttribLocation(program, *name)));
 }
@@ -406,7 +406,7 @@ NAN_METHOD(GetAttribLocation) {
 NAN_METHOD(DepthFunc) {
   Nan::HandleScope scope;
 
-  glDepthFunc(info[0]->Int32Value());
+  glDepthFunc(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -415,10 +415,10 @@ NAN_METHOD(DepthFunc) {
 NAN_METHOD(Viewport) {
   Nan::HandleScope scope;
 
-  int x = info[0]->Int32Value();
-  int y = info[1]->Int32Value();
-  int width = info[2]->Int32Value();
-  int height = info[3]->Int32Value();
+  int x = Nan::To<int>(info[0]).FromJust();
+  int y = Nan::To<int>(info[1]).FromJust();
+  int width = Nan::To<int>(info[2]).FromJust();
+  int height = Nan::To<int>(info[3]).FromJust();
 
   glViewport(x, y, width, height);
 
@@ -428,7 +428,7 @@ NAN_METHOD(Viewport) {
 NAN_METHOD(CreateShader) {
   Nan::HandleScope scope;
 
-  GLuint shader=glCreateShader(info[0]->Int32Value());
+  GLuint shader=glCreateShader(Nan::To<int>(info[0]).FromJust());
   #ifdef LOGGING
   cout<<"createShader "<<shader<<endl;
   #endif
@@ -440,8 +440,8 @@ NAN_METHOD(CreateShader) {
 NAN_METHOD(ShaderSource) {
   Nan::HandleScope scope;
 
-  int id = info[0]->Int32Value();
-  String::Utf8Value code(info[1]);
+  int id = Nan::To<int>(info[0]).FromJust();
+  Nan::Utf8String code(info[1]);
 
   const char* codes[1];
   codes[0] = *code;
@@ -456,7 +456,7 @@ NAN_METHOD(ShaderSource) {
 NAN_METHOD(CompileShader) {
   Nan::HandleScope scope;
 
-  glCompileShader(info[0]->Int32Value());
+  glCompileShader(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -464,7 +464,7 @@ NAN_METHOD(CompileShader) {
 NAN_METHOD(FrontFace) {
   Nan::HandleScope scope;
 
-  glFrontFace(info[0]->Int32Value());
+  glFrontFace(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -473,8 +473,8 @@ NAN_METHOD(FrontFace) {
 NAN_METHOD(GetShaderParameter) {
   Nan::HandleScope scope;
 
-  int shader = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
+  int shader = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
   int value = 0;
   switch (pname) {
   case GL_DELETE_STATUS:
@@ -500,7 +500,7 @@ NAN_METHOD(GetShaderParameter) {
 NAN_METHOD(GetShaderInfoLog) {
   Nan::HandleScope scope;
 
-  int id = info[0]->Int32Value();
+  int id = Nan::To<int>(info[0]).FromJust();
   int Len = 1024;
   char Error[1024];
   glGetShaderInfoLog(id, 1024, &Len, Error);
@@ -524,8 +524,8 @@ NAN_METHOD(CreateProgram) {
 NAN_METHOD(AttachShader) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
-  int shader = info[1]->Int32Value();
+  int program = Nan::To<int>(info[0]).FromJust();
+  int shader = Nan::To<int>(info[1]).FromJust();
 
   glAttachShader(program, shader);
 
@@ -536,7 +536,7 @@ NAN_METHOD(AttachShader) {
 NAN_METHOD(LinkProgram) {
   Nan::HandleScope scope;
 
-  glLinkProgram(info[0]->Int32Value());
+  glLinkProgram(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -545,8 +545,8 @@ NAN_METHOD(LinkProgram) {
 NAN_METHOD(GetProgramParameter) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
+  int program = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
 
   int value = 0;
   switch (pname) {
@@ -572,8 +572,8 @@ NAN_METHOD(GetProgramParameter) {
 NAN_METHOD(GetUniformLocation) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
-  v8::String::Utf8Value name(info[1]);
+  int program = Nan::To<int>(info[0]).FromJust();
+  Nan::Utf8String name(info[1]);
   
   info.GetReturnValue().Set(JS_INT(glGetUniformLocation(program, *name)));
 }
@@ -582,10 +582,10 @@ NAN_METHOD(GetUniformLocation) {
 NAN_METHOD(ClearColor) {
   Nan::HandleScope scope;
 
-  float red = (float) info[0]->NumberValue();
-  float green = (float) info[1]->NumberValue();
-  float blue = (float) info[2]->NumberValue();
-  float alpha = (float) info[3]->NumberValue();
+  float red = (float) Nan::To<double>(info[0]).FromJust();
+  float green = (float) Nan::To<double>(info[1]).FromJust();
+  float blue = (float) Nan::To<double>(info[2]).FromJust();
+  float alpha = (float) Nan::To<double>(info[3]).FromJust();
 
   glClearColor(red, green, blue, alpha);
 
@@ -596,7 +596,7 @@ NAN_METHOD(ClearColor) {
 NAN_METHOD(ClearDepth) {
   Nan::HandleScope scope;
 
-  float depth = (float) info[0]->NumberValue();
+  float depth = (float) Nan::To<double>(info[0]).FromJust();
 
   glClearDepth(depth);
 
@@ -606,14 +606,14 @@ NAN_METHOD(ClearDepth) {
 NAN_METHOD(Disable) {
   Nan::HandleScope scope;
 
-  glDisable(info[0]->Int32Value());
+  glDisable(Nan::To<int>(info[0]).FromJust());
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
 NAN_METHOD(Enable) {
   Nan::HandleScope scope;
 
-  glEnable(info[0]->Int32Value());
+  glEnable(Nan::To<int>(info[0]).FromJust());
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
@@ -621,7 +621,7 @@ NAN_METHOD(Enable) {
 NAN_METHOD(CreateTexture) {
   Nan::HandleScope scope;
 
-  int typeTarget = info[0]->Int32Value();
+  int typeTarget = Nan::To<int>(info[0]).FromJust();
 
 
   GLuint texture;
@@ -637,8 +637,8 @@ NAN_METHOD(CreateTexture) {
 NAN_METHOD(BindTexture) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int texture = info[1]->IsNull() ? 0 : info[1]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int texture = info[1]->IsNull() ? 0 : Nan::To<int>(info[1]).FromJust();
 
   glBindTexture(target, texture);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -648,14 +648,14 @@ NAN_METHOD(BindTexture) {
 NAN_METHOD(TexImage2D) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int level = info[1]->Int32Value();
-  int internalformat = info[2]->Int32Value();
-  int width = info[3]->Int32Value();
-  int height = info[4]->Int32Value();
-  int border = info[5]->Int32Value();
-  int format = info[6]->Int32Value();
-  int type = info[7]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int level = Nan::To<int>(info[1]).FromJust();
+  int internalformat = Nan::To<int>(info[2]).FromJust();
+  int width = Nan::To<int>(info[3]).FromJust();
+  int height = Nan::To<int>(info[4]).FromJust();
+  int border = Nan::To<int>(info[5]).FromJust();
+  int format = Nan::To<int>(info[6]).FromJust();
+  int type = Nan::To<int>(info[7]).FromJust();
   int dataSize;
   void *pixels=getImageData(info[8], dataSize);
 
@@ -668,9 +668,9 @@ NAN_METHOD(TexImage2D) {
 NAN_METHOD(TexParameteri) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
-  int param = info[2]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
+  int param = Nan::To<int>(info[2]).FromJust();
 
   glTexParameteri(target, pname, param);
 
@@ -680,9 +680,9 @@ NAN_METHOD(TexParameteri) {
 NAN_METHOD(TexParameterf) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
-  float param = (float) info[2]->NumberValue();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
+  float param = (float) Nan::To<double>(info[2]).FromJust();
 
   glTexParameterf(target, pname, param);
 
@@ -693,7 +693,7 @@ NAN_METHOD(TexParameterf) {
 NAN_METHOD(Clear) {
   Nan::HandleScope scope;
 
-  glClear(info[0]->Int32Value());
+  glClear(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -702,7 +702,7 @@ NAN_METHOD(Clear) {
 NAN_METHOD(UseProgram) {
   Nan::HandleScope scope;
 
-  glUseProgram(info[0]->Int32Value());
+  glUseProgram(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -725,8 +725,8 @@ NAN_METHOD(CreateBuffer) {
 NAN_METHOD(BindBuffer) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int buffer = info[1]->Uint32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int buffer = Nan::To<uint32_t>(info[1]).FromJust();
   glBindBuffer(target,buffer);
 
   info.GetReturnValue().Set(Nan::Undefined());
@@ -749,8 +749,8 @@ NAN_METHOD(CreateFramebuffer) {
 NAN_METHOD(BindFramebuffer) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int buffer = info[1]->IsNull() ? 0 : info[1]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int buffer = info[1]->IsNull() ? 0 : Nan::To<int>(info[1]).FromJust();
 
   glBindFramebuffer(target, buffer);
 
@@ -761,11 +761,11 @@ NAN_METHOD(BindFramebuffer) {
 NAN_METHOD(FramebufferTexture2D) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int attachment = info[1]->Int32Value();
-  int textarget = info[2]->Int32Value();
-  int texture = info[3]->Int32Value();
-  int level = info[4]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int attachment = Nan::To<int>(info[1]).FromJust();
+  int textarget = Nan::To<int>(info[2]).FromJust();
+  int texture = Nan::To<int>(info[3]).FromJust();
+  int level = Nan::To<int>(info[4]).FromJust();
 
   glFramebufferTexture2D(target, attachment, textarget, texture, level);
 
@@ -775,10 +775,10 @@ NAN_METHOD(FramebufferTexture2D) {
 NAN_METHOD(BufferData) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
   if(info[1]->IsObject()) {
     Local<Object> obj = Local<Object>::Cast(info[1]);
-    GLenum usage = info[2]->Int32Value();
+    GLenum usage = Nan::To<int>(info[2]).FromJust();
     
     CHECK_ARRAY_BUFFER(obj);
     
@@ -792,8 +792,8 @@ NAN_METHOD(BufferData) {
     glBufferData(target, size, data, usage);
   }
   else if(info[1]->IsNumber()) {
-    GLsizeiptr size = info[1]->Uint32Value();
-    GLenum usage = info[2]->Int32Value();
+    GLsizeiptr size = Nan::To<uint32_t>(info[1]).FromJust();
+    GLenum usage = Nan::To<int>(info[2]).FromJust();
     glBufferData(target, size, NULL, usage);
   }
   info.GetReturnValue().Set(Nan::Undefined());
@@ -803,11 +803,11 @@ NAN_METHOD(BufferData) {
 NAN_METHOD(BufferSubData) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int offset = info[1]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int offset = Nan::To<int>(info[1]).FromJust();
   Local<Object> obj = Local<Object>::Cast(info[2]);
-  int srcOffsetBytes = info[3]->Int32Value();
-  int lengthBytes = info[4]->Int32Value();
+  int srcOffsetBytes = Nan::To<int>(info[3]).FromJust();
+  int lengthBytes = Nan::To<int>(info[4]).FromJust();
  // cout<<"offset:"<<offset<<endl;
  // cout<<"srcOffsetBytes:"<<srcOffsetBytes<<endl;
   //cout<<"lengthBytes:"<<lengthBytes<<endl;
@@ -828,7 +828,7 @@ NAN_METHOD(BufferSubData) {
 NAN_METHOD(BlendEquation) {
   Nan::HandleScope scope;
 
-  int mode=info[0]->Int32Value();;
+  int mode=Nan::To<int>(info[0]).FromJust();;
 
   glBlendEquation(mode);
 
@@ -839,8 +839,8 @@ NAN_METHOD(BlendEquation) {
 NAN_METHOD(BlendFunc) {
   Nan::HandleScope scope;
 
-  int sfactor=info[0]->Int32Value();;
-  int dfactor=info[1]->Int32Value();;
+  int sfactor=Nan::To<int>(info[0]).FromJust();;
+  int dfactor=Nan::To<int>(info[1]).FromJust();;
 
   glBlendFunc(sfactor,dfactor);
 
@@ -851,7 +851,7 @@ NAN_METHOD(BlendFunc) {
 NAN_METHOD(EnableVertexAttribArray) {
   Nan::HandleScope scope;
 
-  glEnableVertexAttribArray(info[0]->Int32Value());
+  glEnableVertexAttribArray(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -860,12 +860,12 @@ NAN_METHOD(EnableVertexAttribArray) {
 NAN_METHOD(VertexAttribPointer) {
   Nan::HandleScope scope;
 
-  int indx = info[0]->Int32Value();
-  int size = info[1]->Int32Value();
-  int type = info[2]->Int32Value();
-  int normalized = info[3]->BooleanValue();
-  int stride = info[4]->Int32Value();
-  long offset = info[5]->Int32Value();
+  int indx = Nan::To<int>(info[0]).FromJust();
+  int size = Nan::To<int>(info[1]).FromJust();
+  int type = Nan::To<int>(info[2]).FromJust();
+  int normalized = Nan::To<bool>(info[3]).FromJust();
+  int stride = Nan::To<int>(info[4]).FromJust();
+  long offset = Nan::To<int>(info[5]).FromJust();
 
   //    printf("VertexAttribPointer %d %d %d %d %d %d\n", indx, size, type, normalized, stride, offset);
   glVertexAttribPointer(indx, size, type, normalized, stride, (const GLvoid *)offset);
@@ -877,7 +877,7 @@ NAN_METHOD(VertexAttribPointer) {
 NAN_METHOD(ActiveTexture) {
   Nan::HandleScope scope;
 
-  glActiveTexture(info[0]->Int32Value());
+  glActiveTexture(Nan::To<int>(info[0]).FromJust());
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
@@ -885,10 +885,10 @@ NAN_METHOD(ActiveTexture) {
 NAN_METHOD(DrawElements) {
   Nan::HandleScope scope;
 
-  int mode = info[0]->Int32Value();
-  int count = info[1]->Int32Value();
-  int type = info[2]->Int32Value();
-  GLvoid *offset = reinterpret_cast<GLvoid*>(info[3]->Uint32Value());
+  int mode = Nan::To<int>(info[0]).FromJust();
+  int count = Nan::To<int>(info[1]).FromJust();
+  int type = Nan::To<int>(info[2]).FromJust();
+  GLvoid *offset = reinterpret_cast<GLvoid*>(Nan::To<uint32_t>(info[3]).FromJust());
   glDrawElements(mode, count, type, offset);
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -909,8 +909,8 @@ NAN_METHOD(Finish) {
 NAN_METHOD(VertexAttrib1f) {
   Nan::HandleScope scope;
 
-  GLuint indx = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
+  GLuint indx = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
 
   glVertexAttrib1f(indx, x);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -919,9 +919,9 @@ NAN_METHOD(VertexAttrib1f) {
 NAN_METHOD(VertexAttrib2f) {
   Nan::HandleScope scope;
 
-  GLuint indx = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
-  float y = (float) info[2]->NumberValue();
+  GLuint indx = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
+  float y = (float) Nan::To<double>(info[2]).FromJust();
 
   glVertexAttrib2f(indx, x, y);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -930,10 +930,10 @@ NAN_METHOD(VertexAttrib2f) {
 NAN_METHOD(VertexAttrib3f) {
   Nan::HandleScope scope;
 
-  GLuint indx = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
-  float y = (float) info[2]->NumberValue();
-  float z = (float) info[3]->NumberValue();
+  GLuint indx = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
+  float y = (float) Nan::To<double>(info[2]).FromJust();
+  float z = (float) Nan::To<double>(info[3]).FromJust();
 
   glVertexAttrib3f(indx, x, y, z);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -942,11 +942,11 @@ NAN_METHOD(VertexAttrib3f) {
 NAN_METHOD(VertexAttrib4f) {
   Nan::HandleScope scope;
 
-  GLuint indx = info[0]->Int32Value();
-  float x = (float) info[1]->NumberValue();
-  float y = (float) info[2]->NumberValue();
-  float z = (float) info[3]->NumberValue();
-  float w = (float) info[4]->NumberValue();
+  GLuint indx = Nan::To<int>(info[0]).FromJust();
+  float x = (float) Nan::To<double>(info[1]).FromJust();
+  float y = (float) Nan::To<double>(info[2]).FromJust();
+  float z = (float) Nan::To<double>(info[3]).FromJust();
+  float w = (float) Nan::To<double>(info[4]).FromJust();
 
   glVertexAttrib4f(indx, x, y, z, w);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -955,7 +955,7 @@ NAN_METHOD(VertexAttrib4f) {
 NAN_METHOD(VertexAttrib1fv) {
   Nan::HandleScope scope;
 
-  int indx = info[0]->Int32Value();
+  int indx = Nan::To<int>(info[0]).FromJust();
   GLfloat *data = getArrayData<GLfloat>(info[1]);
   glVertexAttrib1fv(indx, data);
 
@@ -965,7 +965,7 @@ NAN_METHOD(VertexAttrib1fv) {
 NAN_METHOD(VertexAttrib2fv) {
   Nan::HandleScope scope;
 
-  int indx = info[0]->Int32Value();
+  int indx = Nan::To<int>(info[0]).FromJust();
   GLfloat *data = getArrayData<GLfloat>(info[1]);
   glVertexAttrib2fv(indx, data);
 
@@ -975,7 +975,7 @@ NAN_METHOD(VertexAttrib2fv) {
 NAN_METHOD(VertexAttrib3fv) {
   Nan::HandleScope scope;
 
-  int indx = info[0]->Int32Value();
+  int indx = Nan::To<int>(info[0]).FromJust();
   GLfloat *data = getArrayData<GLfloat>(info[1]);
   glVertexAttrib3fv(indx, data);
 
@@ -985,7 +985,7 @@ NAN_METHOD(VertexAttrib3fv) {
 NAN_METHOD(VertexAttrib4fv) {
   Nan::HandleScope scope;
 
-  int indx = info[0]->Int32Value();
+  int indx = Nan::To<int>(info[0]).FromJust();
   GLfloat *data = getArrayData<GLfloat>(info[1]);
   glVertexAttrib4fv(indx, data);
 
@@ -995,10 +995,10 @@ NAN_METHOD(VertexAttrib4fv) {
 NAN_METHOD(BlendColor) {
   Nan::HandleScope scope;
 
-  GLclampf r= (float) info[0]->NumberValue();
-  GLclampf g= (float) info[1]->NumberValue();
-  GLclampf b= (float) info[2]->NumberValue();
-  GLclampf a= (float) info[3]->NumberValue();
+  GLclampf r= (float) Nan::To<double>(info[0]).FromJust();
+  GLclampf g= (float) Nan::To<double>(info[1]).FromJust();
+  GLclampf b= (float) Nan::To<double>(info[2]).FromJust();
+  GLclampf a= (float) Nan::To<double>(info[3]).FromJust();
 
   glBlendColor(r,g,b,a);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1007,8 +1007,8 @@ NAN_METHOD(BlendColor) {
 NAN_METHOD(BlendEquationSeparate) {
   Nan::HandleScope scope;
 
-  GLenum modeRGB= info[0]->Int32Value();
-  GLenum modeAlpha= info[1]->Int32Value();
+  GLenum modeRGB= Nan::To<int>(info[0]).FromJust();
+  GLenum modeAlpha= Nan::To<int>(info[1]).FromJust();
 
   glBlendEquationSeparate(modeRGB,modeAlpha);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1017,10 +1017,10 @@ NAN_METHOD(BlendEquationSeparate) {
 NAN_METHOD(BlendFuncSeparate) {
   Nan::HandleScope scope;
 
-  GLenum srcRGB= info[0]->Int32Value();
-  GLenum dstRGB= info[1]->Int32Value();
-  GLenum srcAlpha= info[2]->Int32Value();
-  GLenum dstAlpha= info[3]->Int32Value();
+  GLenum srcRGB= Nan::To<int>(info[0]).FromJust();
+  GLenum dstRGB= Nan::To<int>(info[1]).FromJust();
+  GLenum srcAlpha= Nan::To<int>(info[2]).FromJust();
+  GLenum dstAlpha= Nan::To<int>(info[3]).FromJust();
 
   glBlendFuncSeparate(srcRGB,dstRGB,srcAlpha,dstAlpha);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1029,7 +1029,7 @@ NAN_METHOD(BlendFuncSeparate) {
 NAN_METHOD(ClearStencil) {
   Nan::HandleScope scope;
 
-  GLint s = info[0]->Int32Value();
+  GLint s = Nan::To<int>(info[0]).FromJust();
 
   glClearStencil(s);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1038,10 +1038,10 @@ NAN_METHOD(ClearStencil) {
 NAN_METHOD(ColorMask) {
   Nan::HandleScope scope;
 
-  GLboolean r = info[0]->BooleanValue();
-  GLboolean g = info[1]->BooleanValue();
-  GLboolean b = info[2]->BooleanValue();
-  GLboolean a = info[3]->BooleanValue();
+  GLboolean r = Nan::To<bool>(info[0]).FromJust();
+  GLboolean g = Nan::To<bool>(info[1]).FromJust();
+  GLboolean b = Nan::To<bool>(info[2]).FromJust();
+  GLboolean a = Nan::To<bool>(info[3]).FromJust();
 
   glColorMask(r,g,b,a);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1050,14 +1050,14 @@ NAN_METHOD(ColorMask) {
 NAN_METHOD(CopyTexImage2D) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLint level = info[1]->Int32Value();
-  GLenum internalformat = info[2]->Int32Value();
-  GLint x = info[3]->Int32Value();
-  GLint y = info[4]->Int32Value();
-  GLsizei width = info[5]->Int32Value();
-  GLsizei height = info[6]->Int32Value();
-  GLint border = info[7]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLint level = Nan::To<int>(info[1]).FromJust();
+  GLenum internalformat = Nan::To<int>(info[2]).FromJust();
+  GLint x = Nan::To<int>(info[3]).FromJust();
+  GLint y = Nan::To<int>(info[4]).FromJust();
+  GLsizei width = Nan::To<int>(info[5]).FromJust();
+  GLsizei height = Nan::To<int>(info[6]).FromJust();
+  GLint border = Nan::To<int>(info[7]).FromJust();
 
   glCopyTexImage2D( target, level, internalformat, x, y, width, height, border);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1066,14 +1066,14 @@ NAN_METHOD(CopyTexImage2D) {
 NAN_METHOD(CopyTexSubImage2D) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLint level = info[1]->Int32Value();
-  GLint xoffset = info[2]->Int32Value();
-  GLint yoffset = info[3]->Int32Value();
-  GLint x = info[4]->Int32Value();
-  GLint y = info[5]->Int32Value();
-  GLsizei width = info[6]->Int32Value();
-  GLsizei height = info[7]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLint level = Nan::To<int>(info[1]).FromJust();
+  GLint xoffset = Nan::To<int>(info[2]).FromJust();
+  GLint yoffset = Nan::To<int>(info[3]).FromJust();
+  GLint x = Nan::To<int>(info[4]).FromJust();
+  GLint y = Nan::To<int>(info[5]).FromJust();
+  GLsizei width = Nan::To<int>(info[6]).FromJust();
+  GLsizei height = Nan::To<int>(info[7]).FromJust();
 
   glCopyTexSubImage2D( target, level, xoffset, yoffset, x, y, width, height);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1082,7 +1082,7 @@ NAN_METHOD(CopyTexSubImage2D) {
 NAN_METHOD(CullFace) {
   Nan::HandleScope scope;
 
-  GLenum mode = info[0]->Int32Value();
+  GLenum mode = Nan::To<int>(info[0]).FromJust();
 
   glCullFace(mode);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1091,7 +1091,7 @@ NAN_METHOD(CullFace) {
 NAN_METHOD(DepthMask) {
   Nan::HandleScope scope;
 
-  GLboolean flag = info[0]->BooleanValue();
+  GLboolean flag = Nan::To<bool>(info[0]).FromJust();
 
   glDepthMask(flag);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1100,8 +1100,8 @@ NAN_METHOD(DepthMask) {
 NAN_METHOD(DepthRange) {
   Nan::HandleScope scope;
 
-  GLclampf zNear = (float) info[0]->NumberValue();
-  GLclampf zFar = (float) info[1]->NumberValue();
+  GLclampf zNear = (float) Nan::To<double>(info[0]).FromJust();
+  GLclampf zFar = (float) Nan::To<double>(info[1]).FromJust();
 
   glDepthRangef(zNear, zFar);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1110,7 +1110,7 @@ NAN_METHOD(DepthRange) {
 NAN_METHOD(DisableVertexAttribArray) {
   Nan::HandleScope scope;
 
-  GLuint index = info[0]->Int32Value();
+  GLuint index = Nan::To<int>(info[0]).FromJust();
 
   glDisableVertexAttribArray(index);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1119,8 +1119,8 @@ NAN_METHOD(DisableVertexAttribArray) {
 NAN_METHOD(Hint) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum mode = info[1]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum mode = Nan::To<int>(info[1]).FromJust();
 
   glHint(target, mode);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1129,7 +1129,7 @@ NAN_METHOD(Hint) {
 NAN_METHOD(IsEnabled) {
   Nan::HandleScope scope;
 
-  GLenum cap = info[0]->Int32Value();
+  GLenum cap = Nan::To<int>(info[0]).FromJust();
 
   bool ret=glIsEnabled(cap)!=0;
   info.GetReturnValue().Set(Nan::New<Boolean>(ret));
@@ -1138,7 +1138,7 @@ NAN_METHOD(IsEnabled) {
 NAN_METHOD(LineWidth) {
   Nan::HandleScope scope;
 
-  GLfloat width = (float) info[0]->NumberValue();
+  GLfloat width = (float) Nan::To<double>(info[0]).FromJust();
 
   glLineWidth(width);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1147,8 +1147,8 @@ NAN_METHOD(LineWidth) {
 NAN_METHOD(PolygonOffset) {
   Nan::HandleScope scope;
 
-  GLfloat factor = (float) info[0]->NumberValue();
-  GLfloat units = (float) info[1]->NumberValue();
+  GLfloat factor = (float) Nan::To<double>(info[0]).FromJust();
+  GLfloat units = (float) Nan::To<double>(info[1]).FromJust();
 
   glPolygonOffset(factor, units);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1157,8 +1157,8 @@ NAN_METHOD(PolygonOffset) {
 NAN_METHOD(SampleCoverage) {
   Nan::HandleScope scope;
 
-  GLclampf value = (float) info[0]->NumberValue();
-  GLboolean invert = info[1]->BooleanValue();
+  GLclampf value = (float) Nan::To<double>(info[0]).FromJust();
+  GLboolean invert = Nan::To<bool>(info[1]).FromJust();
 
   glSampleCoverage(value, invert);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1167,10 +1167,10 @@ NAN_METHOD(SampleCoverage) {
 NAN_METHOD(Scissor) {
   Nan::HandleScope scope;
 
-  GLint x = info[0]->Int32Value();
-  GLint y = info[1]->Int32Value();
-  GLsizei width = info[2]->Int32Value();
-  GLsizei height = info[3]->Int32Value();
+  GLint x = Nan::To<int>(info[0]).FromJust();
+  GLint y = Nan::To<int>(info[1]).FromJust();
+  GLsizei width = Nan::To<int>(info[2]).FromJust();
+  GLsizei height = Nan::To<int>(info[3]).FromJust();
 
   glScissor(x, y, width, height);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1179,9 +1179,9 @@ NAN_METHOD(Scissor) {
 NAN_METHOD(StencilFunc) {
   Nan::HandleScope scope;
 
-  GLenum func = info[0]->Int32Value();
-  GLint ref = info[1]->Int32Value();
-  GLuint mask = info[2]->Int32Value();
+  GLenum func = Nan::To<int>(info[0]).FromJust();
+  GLint ref = Nan::To<int>(info[1]).FromJust();
+  GLuint mask = Nan::To<int>(info[2]).FromJust();
 
   glStencilFunc(func, ref, mask);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1190,10 +1190,10 @@ NAN_METHOD(StencilFunc) {
 NAN_METHOD(StencilFuncSeparate) {
   Nan::HandleScope scope;
 
-  GLenum face = info[0]->Int32Value();
-  GLenum func = info[1]->Int32Value();
-  GLint ref = info[2]->Int32Value();
-  GLuint mask = info[3]->Int32Value();
+  GLenum face = Nan::To<int>(info[0]).FromJust();
+  GLenum func = Nan::To<int>(info[1]).FromJust();
+  GLint ref = Nan::To<int>(info[2]).FromJust();
+  GLuint mask = Nan::To<int>(info[3]).FromJust();
 
   glStencilFuncSeparate(face, func, ref, mask);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1202,7 +1202,7 @@ NAN_METHOD(StencilFuncSeparate) {
 NAN_METHOD(StencilMask) {
   Nan::HandleScope scope;
 
-  GLuint mask = info[0]->Uint32Value();
+  GLuint mask = Nan::To<uint32_t>(info[0]).FromJust();
 
   glStencilMask(mask);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1211,8 +1211,8 @@ NAN_METHOD(StencilMask) {
 NAN_METHOD(StencilMaskSeparate) {
   Nan::HandleScope scope;
 
-  GLenum face = info[0]->Int32Value();
-  GLuint mask = info[1]->Uint32Value();
+  GLenum face = Nan::To<int>(info[0]).FromJust();
+  GLuint mask = Nan::To<uint32_t>(info[1]).FromJust();
 
   glStencilMaskSeparate(face, mask);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1221,9 +1221,9 @@ NAN_METHOD(StencilMaskSeparate) {
 NAN_METHOD(StencilOp) {
   Nan::HandleScope scope;
 
-  GLenum fail = info[0]->Int32Value();
-  GLenum zfail = info[1]->Int32Value();
-  GLenum zpass = info[2]->Int32Value();
+  GLenum fail = Nan::To<int>(info[0]).FromJust();
+  GLenum zfail = Nan::To<int>(info[1]).FromJust();
+  GLenum zpass = Nan::To<int>(info[2]).FromJust();
 
   glStencilOp(fail, zfail, zpass);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1232,10 +1232,10 @@ NAN_METHOD(StencilOp) {
 NAN_METHOD(StencilOpSeparate) {
   Nan::HandleScope scope;
 
-  GLenum face = info[0]->Int32Value();
-  GLenum fail = info[1]->Int32Value();
-  GLenum zfail = info[2]->Int32Value();
-  GLenum zpass = info[3]->Int32Value();
+  GLenum face = Nan::To<int>(info[0]).FromJust();
+  GLenum fail = Nan::To<int>(info[1]).FromJust();
+  GLenum zfail = Nan::To<int>(info[2]).FromJust();
+  GLenum zpass = Nan::To<int>(info[3]).FromJust();
 
   glStencilOpSeparate(face, fail, zfail, zpass);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1244,8 +1244,8 @@ NAN_METHOD(StencilOpSeparate) {
 NAN_METHOD(BindRenderbuffer) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLuint buffer = info[1]->IsNull() ? 0 : info[1]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLuint buffer = info[1]->IsNull() ? 0 : Nan::To<int>(info[1]).FromJust();
 
   glBindRenderbuffer(target, buffer);
 
@@ -1267,7 +1267,7 @@ NAN_METHOD(CreateRenderbuffer) {
 NAN_METHOD(DeleteBuffer) {
   Nan::HandleScope scope;
 
-  GLuint buffer = info[0]->Uint32Value();
+  GLuint buffer = Nan::To<uint32_t>(info[0]).FromJust();
 
   //cout<<"deleteBuffer:"<<buffer<<endl;
   glDeleteBuffers(1,&buffer);
@@ -1277,7 +1277,7 @@ NAN_METHOD(DeleteBuffer) {
 NAN_METHOD(DeleteFramebuffer) {
   Nan::HandleScope scope;
 
-  GLuint buffer = info[0]->Uint32Value();
+  GLuint buffer = Nan::To<uint32_t>(info[0]).FromJust();
 
   glDeleteFramebuffers(1,&buffer);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1286,7 +1286,7 @@ NAN_METHOD(DeleteFramebuffer) {
 NAN_METHOD(DeleteProgram) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Uint32Value();
+  GLuint program = Nan::To<uint32_t>(info[0]).FromJust();
 
   glDeleteProgram(program);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1295,7 +1295,7 @@ NAN_METHOD(DeleteProgram) {
 NAN_METHOD(DeleteRenderbuffer) {
   Nan::HandleScope scope;
 
-  GLuint renderbuffer = info[0]->Uint32Value();
+  GLuint renderbuffer = Nan::To<uint32_t>(info[0]).FromJust();
 
   glDeleteRenderbuffers(1, &renderbuffer);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1304,7 +1304,7 @@ NAN_METHOD(DeleteRenderbuffer) {
 NAN_METHOD(DeleteShader) {
   Nan::HandleScope scope;
 
-  GLuint shader = info[0]->Uint32Value();
+  GLuint shader = Nan::To<uint32_t>(info[0]).FromJust();
 
   glDeleteShader(shader);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1313,7 +1313,7 @@ NAN_METHOD(DeleteShader) {
 NAN_METHOD(DeleteTexture) {
   Nan::HandleScope scope;
 
-  GLuint texture = info[0]->Uint32Value();
+  GLuint texture = Nan::To<uint32_t>(info[0]).FromJust();
 
   glDeleteTextures(1,&texture);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1322,8 +1322,8 @@ NAN_METHOD(DeleteTexture) {
 NAN_METHOD(DetachShader) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Uint32Value();
-  GLuint shader = info[1]->Uint32Value();
+  GLuint program = Nan::To<uint32_t>(info[0]).FromJust();
+  GLuint shader = Nan::To<uint32_t>(info[1]).FromJust();
 
   glDetachShader(program, shader);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1332,10 +1332,10 @@ NAN_METHOD(DetachShader) {
 NAN_METHOD(FramebufferRenderbuffer) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum attachment = info[1]->Int32Value();
-  GLenum renderbuffertarget = info[2]->Int32Value();
-  GLuint renderbuffer = info[3]->Uint32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum attachment = Nan::To<int>(info[1]).FromJust();
+  GLenum renderbuffertarget = Nan::To<int>(info[2]).FromJust();
+  GLuint renderbuffer = Nan::To<uint32_t>(info[3]).FromJust();
 
   glFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1344,8 +1344,8 @@ NAN_METHOD(FramebufferRenderbuffer) {
 NAN_METHOD(GetVertexAttribOffset) {
   Nan::HandleScope scope;
 
-  GLuint index = info[0]->Uint32Value();
-  GLenum pname = info[1]->Int32Value();
+  GLuint index = Nan::To<uint32_t>(info[0]).FromJust();
+  GLenum pname = Nan::To<int>(info[1]).FromJust();
   void *ret=NULL;
 
   glGetVertexAttribPointerv(index, pname, &ret);
@@ -1355,46 +1355,46 @@ NAN_METHOD(GetVertexAttribOffset) {
 NAN_METHOD(IsBuffer) {
   Nan::HandleScope scope;
 
-  info.GetReturnValue().Set(Nan::New<Boolean>(glIsBuffer(info[0]->Uint32Value())!=0));
+  info.GetReturnValue().Set(Nan::New<Boolean>(glIsBuffer(Nan::To<uint32_t>(info[0]).FromJust())!=0));
 }
 
 NAN_METHOD(IsFramebuffer) {
   Nan::HandleScope scope;
 
-  info.GetReturnValue().Set(JS_BOOL(glIsFramebuffer(info[0]->Uint32Value())!=0));
+  info.GetReturnValue().Set(JS_BOOL(glIsFramebuffer(Nan::To<uint32_t>(info[0]).FromJust())!=0));
 }
 
 NAN_METHOD(IsProgram) {
   Nan::HandleScope scope;
 
-  info.GetReturnValue().Set(JS_BOOL(glIsProgram(info[0]->Uint32Value())!=0));
+  info.GetReturnValue().Set(JS_BOOL(glIsProgram(Nan::To<uint32_t>(info[0]).FromJust())!=0));
 }
 
 NAN_METHOD(IsRenderbuffer) {
   Nan::HandleScope scope;
 
-  info.GetReturnValue().Set(JS_BOOL(glIsRenderbuffer( info[0]->Uint32Value())!=0));
+  info.GetReturnValue().Set(JS_BOOL(glIsRenderbuffer( Nan::To<uint32_t>(info[0]).FromJust())!=0));
 }
 
 NAN_METHOD(IsShader) {
   Nan::HandleScope scope;
 
-  info.GetReturnValue().Set(JS_BOOL(glIsShader(info[0]->Uint32Value())!=0));
+  info.GetReturnValue().Set(JS_BOOL(glIsShader(Nan::To<uint32_t>(info[0]).FromJust())!=0));
 }
 
 NAN_METHOD(IsTexture) {
   Nan::HandleScope scope;
 
-  info.GetReturnValue().Set(JS_BOOL(glIsTexture(info[0]->Uint32Value())!=0));
+  info.GetReturnValue().Set(JS_BOOL(glIsTexture(Nan::To<uint32_t>(info[0]).FromJust())!=0));
 }
 
 NAN_METHOD(RenderbufferStorage) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum internalformat = info[1]->Int32Value();
-  GLsizei width = info[2]->Uint32Value();
-  GLsizei height = info[3]->Uint32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum internalformat = Nan::To<int>(info[1]).FromJust();
+  GLsizei width = Nan::To<uint32_t>(info[2]).FromJust();
+  GLsizei height = Nan::To<uint32_t>(info[3]).FromJust();
 
   glRenderbufferStorage(target, internalformat, width, height);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1403,7 +1403,7 @@ NAN_METHOD(RenderbufferStorage) {
 NAN_METHOD(GetShaderSource) {
   Nan::HandleScope scope;
 
-  int shader = info[0]->Int32Value();
+  int shader = Nan::To<int>(info[0]).FromJust();
 
   GLint len;
   glGetShaderiv(shader, GL_SHADER_SOURCE_LENGTH, &len);
@@ -1419,7 +1419,7 @@ NAN_METHOD(GetShaderSource) {
 NAN_METHOD(ValidateProgram) {
   Nan::HandleScope scope;
 
-  glValidateProgram(info[0]->Int32Value());
+  glValidateProgram(Nan::To<int>(info[0]).FromJust());
 
   info.GetReturnValue().Set(Nan::Undefined());
 }
@@ -1427,14 +1427,14 @@ NAN_METHOD(ValidateProgram) {
 NAN_METHOD(TexSubImage2D) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLint level = info[1]->Int32Value();
-  GLint xoffset = info[2]->Int32Value();
-  GLint yoffset = info[3]->Int32Value();
-  GLsizei width = info[4]->Int32Value();
-  GLsizei height = info[5]->Int32Value();
-  GLenum format = info[6]->Int32Value();
-  GLenum type = info[7]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLint level = Nan::To<int>(info[1]).FromJust();
+  GLint xoffset = Nan::To<int>(info[2]).FromJust();
+  GLint yoffset = Nan::To<int>(info[3]).FromJust();
+  GLsizei width = Nan::To<int>(info[4]).FromJust();
+  GLsizei height = Nan::To<int>(info[5]).FromJust();
+  GLenum format = Nan::To<int>(info[6]).FromJust();
+  GLenum type = Nan::To<int>(info[7]).FromJust();
   int dataSize;
   void *pixels=getImageData(info[8], dataSize);
 
@@ -1446,18 +1446,18 @@ NAN_METHOD(TexSubImage2D) {
 NAN_METHOD(ReadPixels) {
   Nan::HandleScope scope;
 
-  GLint x = info[0]->Int32Value();
-  GLint y = info[1]->Int32Value();
-  GLsizei width = info[2]->Int32Value();
-  GLsizei height = info[3]->Int32Value();
-  GLenum format = info[4]->Int32Value();
-  GLenum type = info[5]->Int32Value();
+  GLint x = Nan::To<int>(info[0]).FromJust();
+  GLint y = Nan::To<int>(info[1]).FromJust();
+  GLsizei width = Nan::To<int>(info[2]).FromJust();
+  GLsizei height = Nan::To<int>(info[3]).FromJust();
+  GLenum format = Nan::To<int>(info[4]).FromJust();
+  GLenum type = Nan::To<int>(info[5]).FromJust();
 
   //MODIFIED BY LIAM TO SUPPORT WEBGL2 function signature
   if (!info[6]->IsNull()) {
     Local<Object> obj = Local<Object>::Cast(info[6]);
     if (!obj->IsObject()){
-      GLint offset = info[6]->Int32Value();
+      GLint offset = Nan::To<int>(info[6]).FromJust();
       glReadPixels(x, y, width, height, format, type, (void*)offset);
 
       info.GetReturnValue().Set(Nan::Undefined());
@@ -1476,8 +1476,8 @@ NAN_METHOD(ReadPixels) {
 NAN_METHOD(GetTexParameter) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum pname = info[1]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum pname = Nan::To<int>(info[1]).FromJust();
 
   GLint param_value=0;
   glGetTexParameteriv(target, pname, &param_value);
@@ -1488,8 +1488,8 @@ NAN_METHOD(GetTexParameter) {
 NAN_METHOD(GetActiveAttrib) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Int32Value();
-  GLuint index = info[1]->Int32Value();
+  GLuint program = Nan::To<int>(info[0]).FromJust();
+  GLuint index = Nan::To<int>(info[1]).FromJust();
 
   char name[1024];
   GLsizei length=0;
@@ -1498,9 +1498,9 @@ NAN_METHOD(GetActiveAttrib) {
   glGetActiveAttrib(program, index, 1024, &length, &size, &type, name);
 
   Local<Array> activeInfo = Nan::New<Array>(3);
-  activeInfo->Set(JS_STR("size"), JS_INT(size));
-  activeInfo->Set(JS_STR("type"), JS_INT((int)type));
-  activeInfo->Set(JS_STR("name"), JS_STR(name));
+  Nan::Set(activeInfo, JS_STR("size"), JS_INT(size));
+  Nan::Set(activeInfo, JS_STR("type"), JS_INT((int)type));
+  Nan::Set(activeInfo, JS_STR("name"), JS_STR(name));
 
   info.GetReturnValue().Set(activeInfo);
 }
@@ -1508,8 +1508,8 @@ NAN_METHOD(GetActiveAttrib) {
 NAN_METHOD(GetActiveUniform) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Int32Value();
-  GLuint index = info[1]->Int32Value();
+  GLuint program = Nan::To<int>(info[0]).FromJust();
+  GLuint index = Nan::To<int>(info[1]).FromJust();
 
   char name[1024];
   GLsizei length=0;
@@ -1518,9 +1518,9 @@ NAN_METHOD(GetActiveUniform) {
   glGetActiveUniform(program, index, 1024, &length, &size, &type, name);
 
   Local<Array> activeInfo = Nan::New<Array>(3);
-  activeInfo->Set(JS_STR("size"), JS_INT(size));
-  activeInfo->Set(JS_STR("type"), JS_INT((int)type));
-  activeInfo->Set(JS_STR("name"), JS_STR(name));
+  Nan::Set(activeInfo, JS_STR("size"), JS_INT(size));
+  Nan::Set(activeInfo, JS_STR("type"), JS_INT((int)type));
+  Nan::Set(activeInfo, JS_STR("name"), JS_STR(name));
 
   info.GetReturnValue().Set(activeInfo);
 }
@@ -1528,7 +1528,7 @@ NAN_METHOD(GetActiveUniform) {
 NAN_METHOD(GetAttachedShaders) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Int32Value();
+  GLuint program = Nan::To<int>(info[0]).FromJust();
 
   GLuint shaders[1024];
   GLsizei count;
@@ -1536,7 +1536,7 @@ NAN_METHOD(GetAttachedShaders) {
 
   Local<Array> shadersArr = Nan::New<Array>(count);
   for(int i=0;i<count;i++)
-    shadersArr->Set(i, JS_INT((int)shaders[i]));
+    Nan::Set(shadersArr, i, JS_INT((int)shaders[i]));
 
   info.GetReturnValue().Set(shadersArr);
 }
@@ -1544,7 +1544,7 @@ NAN_METHOD(GetAttachedShaders) {
 NAN_METHOD(GetParameter) {
   Nan::HandleScope scope;
 
-  GLenum name = info[0]->Int32Value();
+  GLenum name = Nan::To<int>(info[0]).FromJust();
 
   switch(name) {
   case GL_BLEND:
@@ -1601,8 +1601,8 @@ NAN_METHOD(GetParameter) {
     ::glGetIntegerv(name, params);
 
     Local<Array> arr=Nan::New<Array>(2);
-    arr->Set(0,JS_INT(params[0]));
-    arr->Set(1,JS_INT(params[1]));
+    Nan::Set(arr, 0,JS_INT(params[0]));
+    Nan::Set(arr, 1,JS_INT(params[1]));
     info.GetReturnValue().Set(arr);
     break;
   }
@@ -1614,10 +1614,10 @@ NAN_METHOD(GetParameter) {
     ::glGetIntegerv(name, params);
 
     Local<Array> arr=Nan::New<Array>(4);
-    arr->Set(0,JS_INT(params[0]));
-    arr->Set(1,JS_INT(params[1]));
-    arr->Set(2,JS_INT(params[2]));
-    arr->Set(3,JS_INT(params[3]));
+    Nan::Set(arr, 0,JS_INT(params[0]));
+    Nan::Set(arr, 1,JS_INT(params[1]));
+    Nan::Set(arr, 2,JS_INT(params[2]));
+    Nan::Set(arr, 3,JS_INT(params[3]));
     info.GetReturnValue().Set(arr);
     break;
   }
@@ -1629,8 +1629,8 @@ NAN_METHOD(GetParameter) {
     GLfloat params[2];
     ::glGetFloatv(name, params);
     Local<Array> arr=Nan::New<Array>(2);
-    arr->Set(0,JS_FLOAT(params[0]));
-    arr->Set(1,JS_FLOAT(params[1]));
+    Nan::Set(arr, 0,JS_FLOAT(params[0]));
+    Nan::Set(arr, 1,JS_FLOAT(params[1]));
     info.GetReturnValue().Set(arr);
     break;
   }
@@ -1641,10 +1641,10 @@ NAN_METHOD(GetParameter) {
     GLfloat params[4];
     ::glGetFloatv(name, params);
     Local<Array> arr=Nan::New<Array>(4);
-    arr->Set(0,JS_FLOAT(params[0]));
-    arr->Set(1,JS_FLOAT(params[1]));
-    arr->Set(2,JS_FLOAT(params[2]));
-    arr->Set(3,JS_FLOAT(params[3]));
+    Nan::Set(arr, 0,JS_FLOAT(params[0]));
+    Nan::Set(arr, 1,JS_FLOAT(params[1]));
+    Nan::Set(arr, 2,JS_FLOAT(params[2]));
+    Nan::Set(arr, 3,JS_FLOAT(params[3]));
     info.GetReturnValue().Set(arr);
     break;
   }
@@ -1654,10 +1654,10 @@ NAN_METHOD(GetParameter) {
     GLboolean params[4];
     ::glGetBooleanv(name, params);
     Local<Array> arr=Nan::New<Array>(4);
-    arr->Set(0,JS_BOOL(params[0]==1));
-    arr->Set(1,JS_BOOL(params[1]==1));
-    arr->Set(2,JS_BOOL(params[2]==1));
-    arr->Set(3,JS_BOOL(params[3]==1));
+    Nan::Set(arr, 0,JS_BOOL(params[0]==1));
+    Nan::Set(arr, 1,JS_BOOL(params[1]==1));
+    Nan::Set(arr, 2,JS_BOOL(params[2]==1));
+    Nan::Set(arr, 3,JS_BOOL(params[3]==1));
     info.GetReturnValue().Set(arr);
     break;
   }
@@ -1695,8 +1695,8 @@ NAN_METHOD(GetParameter) {
 NAN_METHOD(GetBufferParameter) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum pname = info[1]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum pname = Nan::To<int>(info[1]).FromJust();
 
   GLint params;
   glGetBufferParameteriv(target,pname,&params);
@@ -1706,9 +1706,9 @@ NAN_METHOD(GetBufferParameter) {
 NAN_METHOD(GetFramebufferAttachmentParameter) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum attachment = info[1]->Int32Value();
-  GLenum pname = info[2]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum attachment = Nan::To<int>(info[1]).FromJust();
+  GLenum pname = Nan::To<int>(info[2]).FromJust();
 
   GLint params;
   glGetFramebufferAttachmentParameteriv(target,attachment, pname,&params);
@@ -1718,7 +1718,7 @@ NAN_METHOD(GetFramebufferAttachmentParameter) {
 NAN_METHOD(GetProgramInfoLog) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Int32Value();
+  GLuint program = Nan::To<int>(info[0]).FromJust();
   int Len = 1024;
   char Error[1024];
   glGetProgramInfoLog(program, 1024, &Len, Error);
@@ -1729,8 +1729,8 @@ NAN_METHOD(GetProgramInfoLog) {
 NAN_METHOD(GetRenderbufferParameter) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
   int value = 0;
   glGetRenderbufferParameteriv(target,pname,&value);
 
@@ -1740,8 +1740,8 @@ NAN_METHOD(GetRenderbufferParameter) {
 NAN_METHOD(GetUniform) {
   Nan::HandleScope scope;
 
-  GLuint program = info[0]->Int32Value();
-  GLint location = info[1]->Int32Value();
+  GLuint program = Nan::To<int>(info[0]).FromJust();
+  GLint location = Nan::To<int>(info[1]).FromJust();
   if(location < 0 ) info.GetReturnValue().Set(Nan::Undefined());
 
   float data[16]; // worst case scenario is 16 floats
@@ -1750,7 +1750,7 @@ NAN_METHOD(GetUniform) {
 
   Local<Array> arr=Nan::New<Array>(16);
   for(int i=0;i<16;i++)
-    arr->Set(i,JS_FLOAT(data[i]));
+    Nan::Set(arr, i,JS_FLOAT(data[i]));
 
   info.GetReturnValue().Set(arr);
 }
@@ -1758,8 +1758,8 @@ NAN_METHOD(GetUniform) {
 NAN_METHOD(GetVertexAttrib) {
   Nan::HandleScope scope;
 
-  GLuint index = info[0]->Int32Value();
-  GLuint pname = info[1]->Int32Value();
+  GLuint index = Nan::To<int>(info[0]).FromJust();
+  GLuint pname = Nan::To<int>(info[1]).FromJust();
 
   GLint value=0;
 
@@ -1783,10 +1783,10 @@ NAN_METHOD(GetVertexAttrib) {
     float vextex_attribs[4];
     glGetVertexAttribfv(index,pname,vextex_attribs);
     Local<Array> arr=Nan::New<Array>(4);
-    arr->Set(0,JS_FLOAT(vextex_attribs[0]));
-    arr->Set(1,JS_FLOAT(vextex_attribs[1]));
-    arr->Set(2,JS_FLOAT(vextex_attribs[2]));
-    arr->Set(3,JS_FLOAT(vextex_attribs[3]));
+    Nan::Set(arr, 0,JS_FLOAT(vextex_attribs[0]));
+    Nan::Set(arr, 1,JS_FLOAT(vextex_attribs[1]));
+    Nan::Set(arr, 2,JS_FLOAT(vextex_attribs[2]));
+    Nan::Set(arr, 3,JS_FLOAT(vextex_attribs[3]));
     info.GetReturnValue().Set(arr);
     break;
   }
@@ -1809,7 +1809,7 @@ NAN_METHOD(GetSupportedExtensions) {
 NAN_METHOD(GetExtension) {
   Nan::HandleScope scope;
 
-  String::Utf8Value name(info[0]);
+  Nan::Utf8String name(info[0]);
   char *sname=*name;
   char *extensions=(char*) glGetString(GL_EXTENSIONS);
   char *ext=strcasestr(extensions, sname);
@@ -1824,7 +1824,7 @@ NAN_METHOD(GetExtension) {
 NAN_METHOD(CheckFramebufferStatus) {
   Nan::HandleScope scope;
 
-  GLenum target=info[0]->Int32Value();
+  GLenum target=Nan::To<int>(info[0]).FromJust();
 
   info.GetReturnValue().Set(JS_INT((int)glCheckFramebufferStatus(target)));
 }
@@ -1835,13 +1835,13 @@ NAN_METHOD(CheckFramebufferStatus) {
 NAN_METHOD(GetShaderPrecisionFormat) {
   Nan::HandleScope scope;
 
-  GLenum shaderType = info[0]->Int32Value();
-  GLenum precisionType = info[1]->Int32Value();
+  GLenum shaderType = Nan::To<int>(info[0]).FromJust();
+  GLenum precisionType = Nan::To<int>(info[1]).FromJust();
 
  // info.GetReturnValue().Set(JS_INT((int)glCheckFramebufferStatus(shaderType, precisionType)));
 
-  //int program = info[0]->Int32Value();
-  //v8::String::Utf8Value name(info[1]);
+  //int program = Nan::To<int>(info[0]).FromJust();
+  //Nan::Utf8String name(info[1]);
   
  // GLint range;
 
@@ -1853,9 +1853,9 @@ NAN_METHOD(GetShaderPrecisionFormat) {
   glGetShaderPrecisionFormat(shaderType, precisionType, range, &precision);
 
   Local<Array> precisionFormat = Nan::New<Array>(3);
-  precisionFormat->Set(JS_STR("rangeMin"), JS_INT(range[0]));
-  precisionFormat->Set(JS_STR("rangeMax"), JS_INT(range[1]));
-  precisionFormat->Set(JS_STR("precision"), JS_INT(precision));
+  Nan::Set(precisionFormat, JS_STR("rangeMin"), JS_INT(range[0]));
+  Nan::Set(precisionFormat, JS_STR("rangeMax"), JS_INT(range[1]));
+  Nan::Set(precisionFormat, JS_STR("precision"), JS_INT(precision));
 
   info.GetReturnValue().Set(precisionFormat);
 }
@@ -1863,11 +1863,11 @@ NAN_METHOD(GetShaderPrecisionFormat) {
 NAN_METHOD(TexStorage2D) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLsizei levels = info[1]->Int32Value();
-  GLenum internalformat = info[2]->Int32Value();
-  GLsizei width = info[3]->Int32Value();
-  GLsizei height = info[4]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLsizei levels = Nan::To<int>(info[1]).FromJust();
+  GLenum internalformat = Nan::To<int>(info[2]).FromJust();
+  GLsizei width = Nan::To<int>(info[3]).FromJust();
+  GLsizei height = Nan::To<int>(info[4]).FromJust();
 
   glTexStorage2D(target, levels, internalformat, width, height);
 
@@ -1878,14 +1878,14 @@ NAN_METHOD(TexStorage2D) {
 NAN_METHOD(GetBufferSubData) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLint srcByteOffset = info[1]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLint srcByteOffset = Nan::To<int>(info[1]).FromJust();
   
   GLsizei dataSizeBytes = -1;
   void* data = getImageData(info[2], dataSizeBytes);
   
-  GLsizei dstOffset = info[3]->Int32Value();
-  GLsizei length = info[4]->Int32Value();
+  GLsizei dstOffset = Nan::To<int>(info[3]).FromJust();
+  GLsizei length = Nan::To<int>(info[4]).FromJust();
 
   
   GLsizei remainingBytes = dataSizeBytes - dstOffset;
@@ -1900,7 +1900,7 @@ NAN_METHOD(GetBufferSubData) {
 NAN_METHOD(DeleteTransformFeedback) {
   Nan::HandleScope scope;
 
-  GLuint tf = info[0]->Uint32Value();
+  GLuint tf = Nan::To<uint32_t>(info[0]).FromJust();
 
   glDeleteTransformFeedbacks(1,&tf);
   info.GetReturnValue().Set(Nan::Undefined());
@@ -1920,7 +1920,7 @@ NAN_METHOD(CreateSampler) {
 NAN_METHOD(DeleteSampler) {
   Nan::HandleScope scope;
 
-  GLuint sampler = info[0]->Int32Value();
+  GLuint sampler = Nan::To<int>(info[0]).FromJust();
   
   glDeleteSamplers(1,&sampler);
 
@@ -1929,9 +1929,9 @@ NAN_METHOD(DeleteSampler) {
 NAN_METHOD(SamplerParameteri) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
-  int param = info[2]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
+  int param = Nan::To<int>(info[2]).FromJust();
 
   //cout<<"SamplerParameteri"<<target<<","<<pname<<","<<param<<endl;
   glSamplerParameteri(target, pname, param);
@@ -1942,16 +1942,16 @@ NAN_METHOD(SamplerParameteri) {
 NAN_METHOD(BlitFramebuffer) {
   Nan::HandleScope scope;
 
-  int srcX0 = info[0]->Int32Value();
-  int srcY0 = info[1]->Int32Value();
-  int srcX1 = info[2]->Int32Value();
-  int srcY1 = info[3]->Int32Value();
-  int dstX0 = info[4]->Int32Value();
-  int dstY0 = info[5]->Int32Value();
-  int dstX1 = info[6]->Int32Value();
-  int dstY1 = info[7]->Int32Value();
-  int mask = info[8]->Int32Value();
-  int filter = info[9]->Int32Value();
+  int srcX0 = Nan::To<int>(info[0]).FromJust();
+  int srcY0 = Nan::To<int>(info[1]).FromJust();
+  int srcX1 = Nan::To<int>(info[2]).FromJust();
+  int srcY1 = Nan::To<int>(info[3]).FromJust();
+  int dstX0 = Nan::To<int>(info[4]).FromJust();
+  int dstY0 = Nan::To<int>(info[5]).FromJust();
+  int dstX1 = Nan::To<int>(info[6]).FromJust();
+  int dstY1 = Nan::To<int>(info[7]).FromJust();
+  int mask = Nan::To<int>(info[8]).FromJust();
+  int filter = Nan::To<int>(info[9]).FromJust();
 
 
   glBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
@@ -1962,8 +1962,8 @@ NAN_METHOD(BlitFramebuffer) {
 NAN_METHOD(BindSampler) {
   Nan::HandleScope scope;
 
-  int unit = info[0]->Int32Value();
-  int sampler = info[1]->Int32Value();
+  int unit = Nan::To<int>(info[0]).FromJust();
+  int sampler = Nan::To<int>(info[1]).FromJust();
 
   glBindSampler(unit, sampler);
 
@@ -1971,7 +1971,7 @@ NAN_METHOD(BindSampler) {
 }
 
 /*
-  String::Utf8Value code(info[1]);
+  Nan::Utf8String code(info[1]);
 
   const char* codes[1];
   codes[0] = *code;
@@ -1980,24 +1980,24 @@ const GLchar* shaderSrc[]
 NAN_METHOD(TransformFeedbackVaryings) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
+  int program = Nan::To<int>(info[0]).FromJust();
   Local<Array> names = Local<Array>::Cast(info[1]);
   char namesArray[names->Length()][1024];
   const GLchar* namePointers[names->Length()];
-  //std::vector<String::Utf8Value> temps;
+  //std::vector<Nan::Utf8String> temps;
   //Nan::Utf8String* temps[names->Length()];//(Local<Value>::Cast(names->Get(i)));
-  for(int i=0;i<names->Length();++i){
-    v8::String::Utf8Value temp(Local<Value>::Cast(names->Get(i)));
+  for(uint i=0;i<names->Length();++i){
+    Nan::Utf8String temp(Local<Value>::Cast(Nan::Get(names, i).ToLocalChecked()));
     strcpy(namesArray[i], *temp);
     namePointers[i] = namesArray[i];
-    //temps.push_back(v8::String::Utf8Value(Local<Value>::Cast(names->Get(i))));
+    //temps.push_back(Nan::Utf8String(Local<Value>::Cast(names->Get(i))));
   }
  
  /* for(int i=0;i<names->Length();++i){
     cout << "TransformFeedbackVaryings name: "<<namesArray[i]<<" "<<strlen(namesArray[i])<<endl;
   }*/
 
-  int bufferMode = info[2]->Int32Value();
+  int bufferMode = Nan::To<int>(info[2]).FromJust();
   //cout<<"TransformFeedbackVaryings "<<program<<" "<<bufferMode<<endl;
 
   glTransformFeedbackVaryings(program, names->Length(), namePointers, bufferMode);
@@ -2010,8 +2010,8 @@ NAN_METHOD(TransformFeedbackVaryings) {
 NAN_METHOD(GetTransformFeedbackVarying) {
   Nan::HandleScope scope;
 
-  int program = info[0]->Int32Value();
-  int index = info[1]->Int32Value();
+  int program = Nan::To<int>(info[0]).FromJust();
+  int index = Nan::To<int>(info[1]).FromJust();
 
   int bufSize = 1024;
   char name[bufSize];
@@ -2037,8 +2037,8 @@ NAN_METHOD(CreateTransformFeedback) {
 NAN_METHOD(BindTransformFeedback) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int tf = info[1]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int tf = Nan::To<int>(info[1]).FromJust();
 
   glBindTransformFeedback(target, tf);
 
@@ -2046,9 +2046,9 @@ NAN_METHOD(BindTransformFeedback) {
 }
 NAN_METHOD(BindBufferBase) {
   Nan::HandleScope scope;
-  int target = info[0]->Int32Value();
-  int index = info[1]->Int32Value();
-  int buffer = info[2]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int index = Nan::To<int>(info[1]).FromJust();
+  int buffer = Nan::To<int>(info[2]).FromJust();
 
   glBindBufferBase(target, index, buffer);
 
@@ -2057,11 +2057,11 @@ NAN_METHOD(BindBufferBase) {
 NAN_METHOD(BindBufferRange) {
   Nan::HandleScope scope;
 
-  int target = info[0]->Int32Value();
-  int index = info[1]->Int32Value();
-  int buffer = info[2]->Int32Value();
-  int offset = info[3]->Int32Value();
-  int size = info[4]->Int32Value();
+  int target = Nan::To<int>(info[0]).FromJust();
+  int index = Nan::To<int>(info[1]).FromJust();
+  int buffer = Nan::To<int>(info[2]).FromJust();
+  int offset = Nan::To<int>(info[3]).FromJust();
+  int size = Nan::To<int>(info[4]).FromJust();
 
   glBindBufferRange(target, index, buffer, offset, size);
 
@@ -2070,7 +2070,7 @@ NAN_METHOD(BindBufferRange) {
 NAN_METHOD(BeginTransformFeedback) {
   Nan::HandleScope scope;
 
-  GLenum primitiveMode = info[0]->Int32Value();
+  GLenum primitiveMode = Nan::To<int>(info[0]).FromJust();
 
   glBeginTransformFeedback(primitiveMode);
 
@@ -2086,8 +2086,8 @@ NAN_METHOD(EndTransformFeedback) {
 NAN_METHOD(VertexAttribDivisor) {
   Nan::HandleScope scope;
 
-  int index = info[0]->Int32Value();
-  int divisor = info[1]->Int32Value();
+  int index = Nan::To<int>(info[0]).FromJust();
+  int divisor = Nan::To<int>(info[1]).FromJust();
   
   glVertexAttribDivisor(index, divisor);
 
@@ -2096,10 +2096,10 @@ NAN_METHOD(VertexAttribDivisor) {
 NAN_METHOD(DrawArraysInstanced) {
   Nan::HandleScope scope;
 
-  int mode = info[0]->Int32Value();
-  int first = info[1]->Int32Value();
-  int count = info[2]->Int32Value();
-  int instanceCount = info[3]->Int32Value();
+  int mode = Nan::To<int>(info[0]).FromJust();
+  int first = Nan::To<int>(info[1]).FromJust();
+  int count = Nan::To<int>(info[2]).FromJust();
+  int instanceCount = Nan::To<int>(info[3]).FromJust();
   
   glDrawArraysInstanced(mode, first, count, instanceCount);
 
@@ -2109,11 +2109,11 @@ NAN_METHOD(DrawArraysInstanced) {
 /*NAN_METHOD(DrawElementsInstanced) {
   Nan::HandleScope scope;
 
-  int mode = info[0]->Int32Value();
-  int count = info[1]->Int32Value();
-  int type = info[2]->Int32Value();
-  int first = info[3]->Int32Value();
-  int instanceCount = info[4]->Int32Value();
+  int mode = Nan::To<int>(info[0]).FromJust();
+  int count = Nan::To<int>(info[1]).FromJust();
+  int type = Nan::To<int>(info[2]).FromJust();
+  int first = Nan::To<int>(info[3]).FromJust();
+  int instanceCount = Nan::To<int>(info[4]).FromJust();
   
   glDrawElementsInstanced(mode, count, type, first, instanceCount);
 
@@ -2123,8 +2123,8 @@ NAN_METHOD(DrawArraysInstanced) {
 NAN_METHOD(FenceSync) {
    Nan::HandleScope scope;
 
-  int condition = info[0]->Int32Value();
-  int flags = info[1]->Int32Value();
+  int condition = Nan::To<int>(info[0]).FromJust();
+  int flags = Nan::To<int>(info[1]).FromJust();
   
   GLsync sync = glFenceSync(condition, flags);
   int syncId = registerSync(sync);
@@ -2134,7 +2134,7 @@ NAN_METHOD(FenceSync) {
 NAN_METHOD(DeleteSync) {
    Nan::HandleScope scope;
 
-  int syncId = info[0]->Int32Value();
+  int syncId = Nan::To<int>(info[0]).FromJust();
   
   GLsync sync = getSync(syncId);
   glDeleteSync(sync);
@@ -2145,8 +2145,8 @@ NAN_METHOD(DeleteSync) {
 NAN_METHOD(GetSyncParameter) {
   Nan::HandleScope scope;
 
-  int syncId = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
+  int syncId = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
 
   GLsizei bufSize = 1;
   GLint data[bufSize];
@@ -2161,11 +2161,11 @@ NAN_METHOD(GetSyncParameter) {
 NAN_METHOD(DrawBuffers) {
   Nan::HandleScope scope;
 
-  //int program = info[0]->Int32Value();
+  //int program = Nan::To<int>(info[0]).FromJust();
   Local<Array> attachments = Local<Array>::Cast(info[0]);
   GLenum bufs[attachments->Length()];
   for(uint i=0;i<attachments->Length();++i){
-    bufs[i] = attachments->Get(i)->Int32Value();
+    bufs[i] = Nan::To<int>(Nan::Get(attachments, i).ToLocalChecked()).FromJust();
   }
  
   glDrawBuffers(attachments->Length(), bufs);
@@ -2175,12 +2175,12 @@ NAN_METHOD(DrawBuffers) {
 NAN_METHOD(TexStorage3D) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLsizei levels = info[1]->Int32Value();
-  GLenum internalformat = info[2]->Int32Value();
-  GLsizei width = info[3]->Int32Value();
-  GLsizei height = info[4]->Int32Value();
-  GLsizei depth = info[5]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLsizei levels = Nan::To<int>(info[1]).FromJust();
+  GLenum internalformat = Nan::To<int>(info[2]).FromJust();
+  GLsizei width = Nan::To<int>(info[3]).FromJust();
+  GLsizei height = Nan::To<int>(info[4]).FromJust();
+  GLsizei depth = Nan::To<int>(info[5]).FromJust();
 
   glTexStorage3D(target, levels, internalformat, width, height, depth);
 
@@ -2190,11 +2190,11 @@ NAN_METHOD(TexStorage3D) {
 NAN_METHOD(FramebufferTextureLayer) {
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLenum attachment = info[1]->Int32Value();
-  int tex = info[2]->Int32Value();
-  int level = info[3]->Int32Value();
-  int layer = info[4]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum attachment = Nan::To<int>(info[1]).FromJust();
+  int tex = Nan::To<int>(info[2]).FromJust();
+  int level = Nan::To<int>(info[3]).FromJust();
+  int layer = Nan::To<int>(info[4]).FromJust();
 
   glFramebufferTextureLayer(target, attachment, tex, level, layer);
 
@@ -2204,11 +2204,11 @@ NAN_METHOD(CopyBufferSubData) {
   Nan::HandleScope scope;
 
   //readTarget, writeTarget, readOffset, writeOffset, size
-  GLenum readTarget = info[0]->Int32Value();
-  GLenum writeTarget = info[1]->Int32Value();
-  int readOffset = info[2]->Int32Value();
-  int writeOffset = info[3]->Int32Value();
-  int size = info[4]->Int32Value();
+  GLenum readTarget = Nan::To<int>(info[0]).FromJust();
+  GLenum writeTarget = Nan::To<int>(info[1]).FromJust();
+  int readOffset = Nan::To<int>(info[2]).FromJust();
+  int writeOffset = Nan::To<int>(info[3]).FromJust();
+  int size = Nan::To<int>(info[4]).FromJust();
 
   glCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size);
 
@@ -2218,9 +2218,9 @@ NAN_METHOD(ClearBufferfv) {
   Nan::HandleScope scope;
 
   //readTarget, writeTarget, readOffset, writeOffset, size
-  GLenum buffer = info[0]->Int32Value();
-  GLint drawBuffer = info[1]->Int32Value();
-  int srcOffset = info[3]->Int32Value();
+  GLenum buffer = Nan::To<int>(info[0]).FromJust();
+  GLint drawBuffer = Nan::To<int>(info[1]).FromJust();
+  int srcOffset = Nan::To<int>(info[3]).FromJust();
 
   int num;
   GLfloat* ptr = getArrayData<GLfloat>(info[2],&num);
@@ -2240,10 +2240,10 @@ NAN_METHOD(ClearBufferData) {
   Nan::HandleScope scope;
 
   //readTarget, writeTarget, readOffset, writeOffset, size
-  GLenum target = info[0]->Int32Value();
-  GLenum internalFormat = info[1]->Int32Value();
-  GLenum format = info[2]->Int32Value();
-  GLenum type = info[3]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum internalFormat = Nan::To<int>(info[1]).FromJust();
+  GLenum format = Nan::To<int>(info[2]).FromJust();
+  GLenum type = Nan::To<int>(info[3]).FromJust();
 /*
   cout<<"target:"<<target<<endl;
   cout<<"internalFormat:"<<internalFormat<<endl;
@@ -2253,7 +2253,7 @@ NAN_METHOD(ClearBufferData) {
   cout<<"type:"<<type<<endl;
 */
   Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[4]);
-  int size = arr->ByteLength();
+  //int size = arr->ByteLength();
   void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
 
   //cout<<"size:"<<size<<endl;
@@ -2268,10 +2268,10 @@ NAN_METHOD(ClearNamedBufferData) {
   Nan::HandleScope scope;
 
   //readTarget, writeTarget, readOffset, writeOffset, size
-  int buf = info[0]->Int32Value();
-  GLenum internalFormat = info[1]->Int32Value();
-  GLenum format = info[2]->Int32Value();
-  GLenum type = info[3]->Int32Value();
+  int buf = Nan::To<int>(info[0]).FromJust();
+  GLenum internalFormat = Nan::To<int>(info[1]).FromJust();
+  GLenum format = Nan::To<int>(info[2]).FromJust();
+  GLenum type = Nan::To<int>(info[3]).FromJust();
 
   //cout<<"target:"<<target<<endl;
  // cout<<"buf:"<<buf<<endl;
@@ -2286,7 +2286,7 @@ NAN_METHOD(ClearNamedBufferData) {
     glClearNamedBufferData(buf, internalFormat, format, type, NULL);
   }else{
     Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[4]);
-    int size = arr->ByteLength();
+    //int size = arr->ByteLength();
     void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
 
    // cout<<"size:"<<size<<endl;
@@ -2302,12 +2302,12 @@ NAN_METHOD(ClearBufferSubData) {
   Nan::HandleScope scope;
 
   //readTarget, writeTarget, readOffset, writeOffset, size
-  GLenum target = info[0]->Int32Value();
-  GLenum internalFormat = info[1]->Int32Value();
-  GLint offset = info[2]->Int32Value();
-  GLint clearSize = info[3]->Int32Value();
-  GLenum format = info[4]->Int32Value();
-  GLenum type = info[5]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLenum internalFormat = Nan::To<int>(info[1]).FromJust();
+  GLint offset = Nan::To<int>(info[2]).FromJust();
+  GLint clearSize = Nan::To<int>(info[3]).FromJust();
+  GLenum format = Nan::To<int>(info[4]).FromJust();
+  GLenum type = Nan::To<int>(info[5]).FromJust();
 
   cout<<"target:"<<target<<endl;
   cout<<"internalFormat:"<<internalFormat<<endl;
@@ -2332,7 +2332,7 @@ NAN_METHOD(ClearBufferSubData) {
 }
 NAN_METHOD(ReadBuffer) {
   Nan::HandleScope scope;
-  GLenum src = info[0]->Int32Value();
+  GLenum src = Nan::To<int>(info[0]).FromJust();
 
   glReadBuffer(src);
   
@@ -2341,11 +2341,11 @@ NAN_METHOD(ReadBuffer) {
 NAN_METHOD(VertexAttribIPointer) {
   Nan::HandleScope scope;
 
-  int indx = info[0]->Int32Value();
-  int size = info[1]->Int32Value();
-  int type = info[2]->Int32Value();
-  int stride = info[3]->Int32Value();
-  long offset = info[4]->Int32Value();
+  int indx = Nan::To<int>(info[0]).FromJust();
+  int size = Nan::To<int>(info[1]).FromJust();
+  int type = Nan::To<int>(info[2]).FromJust();
+  int stride = Nan::To<int>(info[3]).FromJust();
+  long offset = Nan::To<int>(info[4]).FromJust();
 
   //    printf("VertexAttribPointer %d %d %d %d %d %d\n", indx, size, type, normalized, stride, offset);
   glVertexAttribIPointer(indx, size, type, stride, (const GLvoid *)offset);
@@ -2356,13 +2356,13 @@ NAN_METHOD(VertexAttribIPointer) {
 //START OF OpenGL 4.6 functions
 NAN_METHOD(BindImageTexture) {
   Nan::HandleScope scope;
-  GLuint unit = info[0]->Int32Value();
-  GLuint texture = info[1]->Int32Value();
-  GLint level = info[2]->Int32Value();
-  GLboolean layered = info[3]->BooleanValue();
-  GLint layer = info[4]->Int32Value();
-  GLenum access = info[5]->Int32Value();
-  GLenum format = info[6]->Int32Value();
+  GLuint unit = Nan::To<int>(info[0]).FromJust();
+  GLuint texture = Nan::To<int>(info[1]).FromJust();
+  GLint level = Nan::To<int>(info[2]).FromJust();
+  GLboolean layered = Nan::To<bool>(info[3]).FromJust();
+  GLint layer = Nan::To<int>(info[4]).FromJust();
+  GLenum access = Nan::To<int>(info[5]).FromJust();
+  GLenum format = Nan::To<int>(info[6]).FromJust();
 
   glBindImageTexture(unit, texture, level, layered, layer, access, format);
 
@@ -2370,9 +2370,9 @@ NAN_METHOD(BindImageTexture) {
 }
 NAN_METHOD(DispatchCompute) {
   Nan::HandleScope scope;
-  GLuint sx = info[0]->Int32Value();
-  GLuint sy = info[1]->Int32Value();
-  GLuint sz = info[2]->Int32Value();
+  GLuint sx = Nan::To<int>(info[0]).FromJust();
+  GLuint sy = Nan::To<int>(info[1]).FromJust();
+  GLuint sz = Nan::To<int>(info[2]).FromJust();
 
   glDispatchCompute(sx, sy, sz);
 
@@ -2381,13 +2381,13 @@ NAN_METHOD(DispatchCompute) {
 }
 NAN_METHOD(DispatchComputeGroupSize) {
   Nan::HandleScope scope;
-  GLuint sx = info[0]->Int32Value();
-  GLuint sy = info[1]->Int32Value();
-  GLuint sz = info[2]->Int32Value();
+  GLuint sx = Nan::To<int>(info[0]).FromJust();
+  GLuint sy = Nan::To<int>(info[1]).FromJust();
+  GLuint sz = Nan::To<int>(info[2]).FromJust();
 
-  GLuint wx = info[3]->Int32Value();
-  GLuint wy = info[4]->Int32Value();
-  GLuint wz = info[5]->Int32Value();
+  GLuint wx = Nan::To<int>(info[3]).FromJust();
+  GLuint wy = Nan::To<int>(info[4]).FromJust();
+  GLuint wz = Nan::To<int>(info[5]).FromJust();
 
   glDispatchComputeGroupSizeARB(sx, sy, sz, wx, wy, wz);
 
@@ -2396,7 +2396,7 @@ NAN_METHOD(DispatchComputeGroupSize) {
 }
 NAN_METHOD(MemoryBarrier) {
   Nan::HandleScope scope;
-  GLuint bits = info[0]->Int32Value();
+  GLuint bits = Nan::To<int>(info[0]).FromJust();
 
   glMemoryBarrier(bits);
 
@@ -2405,11 +2405,11 @@ NAN_METHOD(MemoryBarrier) {
 }
 NAN_METHOD(ClearTexImage){
   Nan::HandleScope scope;
-  GLuint tex = info[0]->Int32Value();
-  GLuint level = info[1]->Int32Value();
-  GLenum format = info[2]->Int32Value();
-  GLenum type = info[3]->Int32Value();
-  //GLenum data = info[0]->Int32Value();
+  GLuint tex = Nan::To<int>(info[0]).FromJust();
+  GLuint level = Nan::To<int>(info[1]).FromJust();
+  GLenum format = Nan::To<int>(info[2]).FromJust();
+  GLenum type = Nan::To<int>(info[3]).FromJust();
+  //GLenum data = Nan::To<int>(info[0]).FromJust();
   int dataSize;
   void* data = getImageData(info[4], dataSize);
 
@@ -2420,23 +2420,23 @@ NAN_METHOD(ClearTexImage){
 }
 NAN_METHOD(CopyImageSubData){
   Nan::HandleScope scope;
-  GLuint srcTex = info[0]->Int32Value();
-  GLenum srcTarget = info[1]->Int32Value();
-  GLuint srcLevel = info[2]->Int32Value();
-  GLuint srcX = info[3]->Int32Value();
-  GLuint srcY = info[4]->Int32Value();
-  GLuint srcZ = info[5]->Int32Value();
+  GLuint srcTex = Nan::To<int>(info[0]).FromJust();
+  GLenum srcTarget = Nan::To<int>(info[1]).FromJust();
+  GLuint srcLevel = Nan::To<int>(info[2]).FromJust();
+  GLuint srcX = Nan::To<int>(info[3]).FromJust();
+  GLuint srcY = Nan::To<int>(info[4]).FromJust();
+  GLuint srcZ = Nan::To<int>(info[5]).FromJust();
 
-  GLuint dstTex = info[6]->Int32Value();
-  GLenum dstTarget = info[7]->Int32Value();
-  GLuint dstLevel = info[8]->Int32Value();
-  GLuint dstX = info[9]->Int32Value();
-  GLuint dstY = info[10]->Int32Value();
-  GLuint dstZ = info[11]->Int32Value();
+  GLuint dstTex = Nan::To<int>(info[6]).FromJust();
+  GLenum dstTarget = Nan::To<int>(info[7]).FromJust();
+  GLuint dstLevel = Nan::To<int>(info[8]).FromJust();
+  GLuint dstX = Nan::To<int>(info[9]).FromJust();
+  GLuint dstY = Nan::To<int>(info[10]).FromJust();
+  GLuint dstZ = Nan::To<int>(info[11]).FromJust();
 
-  GLuint sizeX = info[12]->Int32Value();
-  GLuint sizeY = info[13]->Int32Value();
-  GLuint sizeZ = info[14]->Int32Value();
+  GLuint sizeX = Nan::To<int>(info[12]).FromJust();
+  GLuint sizeY = Nan::To<int>(info[13]).FromJust();
+  GLuint sizeZ = Nan::To<int>(info[14]).FromJust();
 
   
   glCopyImageSubData(srcTex, srcTarget, srcLevel, srcX, srcY, srcZ, dstTex, dstTarget, dstLevel, dstX, dstY, dstZ, sizeX, sizeY, sizeZ);
@@ -2446,16 +2446,16 @@ NAN_METHOD(CopyImageSubData){
 NAN_METHOD(GetTextureImage){
   Nan::HandleScope scope;
  
-  GLuint tex = info[0]->Int32Value();
-  GLint level = info[1]->Int32Value();
-  GLenum format = info[2]->Int32Value();
-  GLenum type = info[3]->Int32Value();
-  GLint bufSize = info[4]->Int32Value();
+  GLuint tex = Nan::To<int>(info[0]).FromJust();
+  GLint level = Nan::To<int>(info[1]).FromJust();
+  GLenum format = Nan::To<int>(info[2]).FromJust();
+  GLenum type = Nan::To<int>(info[3]).FromJust();
+  GLint bufSize = Nan::To<int>(info[4]).FromJust();
 
   if (!info[5]->IsNull()) {
     Local<Object> obj = Local<Object>::Cast(info[5]);
     if (!obj->IsObject()){
-      GLint offset = info[5]->Int32Value();
+      GLint offset = Nan::To<int>(info[5]).FromJust();
       glGetTextureImage(tex, level, format, type, bufSize, (void*) offset);
       //glReadPixels(x, y, width, height, format, type, (void*)offset);
 
@@ -2474,9 +2474,9 @@ NAN_METHOD(GetTextureImage){
 NAN_METHOD(BufferStorage){
   Nan::HandleScope scope;
 
-  GLenum target = info[0]->Int32Value();
-  GLint byteSize = info[1]->Int32Value();
-  GLbitfield flags = info[3]->Int32Value();
+  GLenum target = Nan::To<int>(info[0]).FromJust();
+  GLint byteSize = Nan::To<int>(info[1]).FromJust();
+  GLbitfield flags = Nan::To<int>(info[3]).FromJust();
 
   /*if (info[2]->IsNull()) {
     glBufferStorage(target, byteSize, NULL, flags);
@@ -2505,9 +2505,9 @@ NAN_METHOD(BufferStorage){
 NAN_METHOD(NamedBufferStorage){
   Nan::HandleScope scope;
 
-  int buf = info[0]->Int32Value();
-  GLint byteSize = info[1]->Int32Value();
-  GLbitfield flags = info[3]->Int32Value();
+  int buf = Nan::To<int>(info[0]).FromJust();
+  GLint byteSize = Nan::To<int>(info[1]).FromJust();
+  GLbitfield flags = Nan::To<int>(info[3]).FromJust();
 
   /*if (info[2]->IsNull()) {
     glBufferStorage(target, byteSize, NULL, flags);
@@ -2536,14 +2536,14 @@ NAN_METHOD(NamedBufferStorage){
 NAN_METHOD(GetNamedBufferSubData) {
   Nan::HandleScope scope;
 
-  int buf = info[0]->Int32Value();
-  GLint srcByteOffset = info[1]->Int32Value();
+  int buf = Nan::To<int>(info[0]).FromJust();
+  GLint srcByteOffset = Nan::To<int>(info[1]).FromJust();
   
   GLsizei dataSizeBytes = -1;
   void* data = getImageData(info[2], dataSizeBytes);
   
-  GLsizei dstOffset = info[3]->Int32Value();
-  GLsizei length = info[4]->Int32Value();
+  GLsizei dstOffset = Nan::To<int>(info[3]).FromJust();
+  GLsizei length = Nan::To<int>(info[4]).FromJust();
 
   
   GLsizei remainingBytes = dataSizeBytes - dstOffset;
@@ -2570,11 +2570,11 @@ NAN_METHOD(GetNamedBufferSubData) {
 NAN_METHOD(NamedBufferSubData) {
   Nan::HandleScope scope;
 
-  int buf = info[0]->Int32Value();
-  int offset = info[1]->Int32Value();
+  int buf = Nan::To<int>(info[0]).FromJust();
+  int offset = Nan::To<int>(info[1]).FromJust();
   Local<Object> obj = Local<Object>::Cast(info[2]);
-  int srcOffsetBytes = info[3]->Int32Value();
-  int lengthBytes = info[4]->Int32Value();
+  int srcOffsetBytes = Nan::To<int>(info[3]).FromJust();
+  int lengthBytes = Nan::To<int>(info[4]).FromJust();
  // cout<<"offset:"<<offset<<endl;
  // cout<<"srcOffsetBytes:"<<srcOffsetBytes<<endl;
   //cout<<"lengthBytes:"<<lengthBytes<<endl;
@@ -2592,11 +2592,11 @@ NAN_METHOD(NamedBufferSubData) {
 NAN_METHOD(TextureStorage2D) {
   Nan::HandleScope scope;
 
-  int tex = info[0]->Int32Value();
-  int levels = info[1]->Int32Value();
-  int internalFormat = info[2]->Int32Value();
-  int width = info[3]->Int32Value();
-  int height = info[4]->Int32Value();
+  int tex = Nan::To<int>(info[0]).FromJust();
+  int levels = Nan::To<int>(info[1]).FromJust();
+  int internalFormat = Nan::To<int>(info[2]).FromJust();
+  int width = Nan::To<int>(info[3]).FromJust();
+  int height = Nan::To<int>(info[4]).FromJust();
   
 
   glTextureStorage2D(tex, levels, internalFormat, width, height);
@@ -2606,12 +2606,12 @@ NAN_METHOD(TextureStorage2D) {
 NAN_METHOD(TextureStorage3D) {
   Nan::HandleScope scope;
 
-  int tex = info[0]->Int32Value();
-  int levels = info[1]->Int32Value();
-  int internalFormat = info[2]->Int32Value();
-  int width = info[3]->Int32Value();
-  int height = info[4]->Int32Value();
-  int depth = info[5]->Int32Value();
+  int tex = Nan::To<int>(info[0]).FromJust();
+  int levels = Nan::To<int>(info[1]).FromJust();
+  int internalFormat = Nan::To<int>(info[2]).FromJust();
+  int width = Nan::To<int>(info[3]).FromJust();
+  int height = Nan::To<int>(info[4]).FromJust();
+  int depth = Nan::To<int>(info[5]).FromJust();
   
 
   glTextureStorage3D(tex, levels, internalFormat, width, height, depth);
@@ -2622,14 +2622,14 @@ NAN_METHOD(TextureStorage3D) {
 NAN_METHOD(TextureSubImage2D) {
   Nan::HandleScope scope;
 
-  int tex = info[0]->Int32Value();
-  GLint level = info[1]->Int32Value();
-  GLint xoffset = info[2]->Int32Value();
-  GLint yoffset = info[3]->Int32Value();
-  GLsizei width = info[4]->Int32Value();
-  GLsizei height = info[5]->Int32Value();
-  GLenum format = info[6]->Int32Value();
-  GLenum type = info[7]->Int32Value();
+  int tex = Nan::To<int>(info[0]).FromJust();
+  GLint level = Nan::To<int>(info[1]).FromJust();
+  GLint xoffset = Nan::To<int>(info[2]).FromJust();
+  GLint yoffset = Nan::To<int>(info[3]).FromJust();
+  GLsizei width = Nan::To<int>(info[4]).FromJust();
+  GLsizei height = Nan::To<int>(info[5]).FromJust();
+  GLenum format = Nan::To<int>(info[6]).FromJust();
+  GLenum type = Nan::To<int>(info[7]).FromJust();
   int dataSize;
   void *pixels=getImageData(info[8], dataSize);
 
@@ -2641,9 +2641,9 @@ NAN_METHOD(TextureSubImage2D) {
 NAN_METHOD(TextureParameteri) {
   Nan::HandleScope scope;
 
-  int tex = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
-  int param = info[2]->Int32Value();
+  int tex = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
+  int param = Nan::To<int>(info[2]).FromJust();
 
   glTextureParameteri(tex, pname, param);
 
@@ -2652,9 +2652,9 @@ NAN_METHOD(TextureParameteri) {
 NAN_METHOD(TextureParameterf) {
   Nan::HandleScope scope;
 
-  int tex = info[0]->Int32Value();
-  int pname = info[1]->Int32Value();
-  float param = info[2]->NumberValue();
+  int tex = Nan::To<int>(info[0]).FromJust();
+  int pname = Nan::To<int>(info[1]).FromJust();
+  float param = Nan::To<double>(info[2]).FromJust();
 
   glTextureParameterf(tex, pname, param);
 

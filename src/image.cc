@@ -28,7 +28,7 @@ static void unregisterImage(Image* obj) {
 
 Persistent<Function> Image::constructor_template;
 
-void Image::Initialize (Handle<Object> target) {
+void Image::Initialize (Local<Object> target) {
     Nan::HandleScope scope;
 
   // constructor
@@ -44,9 +44,9 @@ void Image::Initialize (Handle<Object> target) {
   Nan::SetAccessor(proto,JS_STR("height"), HeightGetter);
   Nan::SetAccessor(proto,JS_STR("pitch"), PitchGetter);
   Nan::SetAccessor(proto,JS_STR("src"), SrcGetter, SrcSetter);
-  Nan::Set(target, JS_STR("Image"), ctor->GetFunction());
+  Nan::Set(target, JS_STR("Image"), Nan::GetFunction(ctor).ToLocalChecked());//Nan::To<Function>(ctor).ToLocalChecked());
 
-  constructor_template.Reset(Isolate::GetCurrent(), ctor->GetFunction());
+  constructor_template.Reset(Isolate::GetCurrent(), Nan::GetFunction(ctor).ToLocalChecked());
 
   FreeImage_Initialise(true);
 }
@@ -139,7 +139,8 @@ NAN_SETTER(Image::SrcSetter) {
   Nan::MaybeLocal<v8::Object> buffer;
 
   Image *image = ObjectWrap::Unwrap<Image>(info.This());
-  String::Utf8Value filename_s(value->ToString());
+  //String::Utf8Value filename_s(value->ToString());
+  Nan::Utf8String filename_s(value);
   image->Load(*filename_s);
 
   // adjust internal fields
@@ -168,14 +169,15 @@ NAN_SETTER(Image::SrcSetter) {
   assert(emit_v.ToLocalChecked()->IsFunction());
   Local<Function> emit_f = emit_v.ToLocalChecked().As<Function>();
 
-  Handle<Value> argv[2] = {
+  Local<Value> argv[2] = {
     JS_STR("load"), // event name
     value  // argument
   };
 
   TryCatch tc(info.GetIsolate());//COMPILE FIX - MIGHT BE WRONG - USED TO BE: TryCatch tc;
 
-  emit_f->Call(info.This(), 2, argv);
+  //emit_f->Call(info.This(), 2, argv);
+  Nan::Call(emit_f, info.This(), 2, argv);
 
   if (tc.HasCaught())
     FatalException(info.GetIsolate(),tc);
@@ -183,7 +185,8 @@ NAN_SETTER(Image::SrcSetter) {
 
 NAN_METHOD(Image::save) {
   Nan::HandleScope scope;
-  String::Utf8Value filename(info[0]->ToString());
+  //String::Utf8Value filename(info[0]->ToString());
+  Nan::Utf8String filename(info[0]);
 
   FREE_IMAGE_FORMAT format = FreeImage_GetFIFFromFilename(*filename);
 
