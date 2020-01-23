@@ -233,6 +233,8 @@ var shaders = {
 //    c.width = viewX;
 //    c.height = viewY;
 
+    console.log('HERE')
+
     prog_advance = gl.createProgram();
     gl.attachShader(prog_advance, getShader(gl, "shader-vs"));
     gl.attachShader(prog_advance, getShader(gl, "shader-fs-advance"));
@@ -253,9 +255,14 @@ var shaders = {
     gl.attachShader(prog_blur_vertical, getShader(gl, "shader-fs-blur-vertical"));
     gl.linkProgram(prog_blur_vertical);
 
+    console.log('HERE2')
+    //  console.log(gl.getSupportedExtensions())
+
     var posBuffer = gl.createBuffer();
+    console.log('after createBuffer')
     gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
 
+    console.log('HERE3s')
     var vertices = new Float32Array([ -1, -1, 0, 1, -1, 0, -1, 1, 0, 1, 1, 0 ]);
 
     var aPosLoc = gl.getAttribLocation(prog_advance, "aPos");
