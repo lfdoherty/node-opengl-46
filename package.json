@@ -23,9 +23,9 @@
   },
   "license": "BSD-3-Clause",
   "dependencies": {
-    "@lfdoherty/node-glfw": "^0.4.7",
+    "@lfdoherty/node-glfw": "^0.4.8",
     "bindings": "^1.5.0",
     "nan": "^2.14.0",
-    "node-gyp": "^5.0.3"
+    "node-gyp": "^5.1.0"
   }
 }
