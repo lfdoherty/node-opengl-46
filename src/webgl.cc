@@ -99,9 +99,10 @@ NAN_METHOD(Init) {
     fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
     info.GetReturnValue().Set(JS_INT(-1));
   }else{
-    //fprintf(stdout, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+    //fprintf(stdout, "Status*: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 
     glEnable(GL_PROGRAM_POINT_SIZE);
+    cout << "GL Version: " << glGetString(GL_VERSION) << endl;
     info.GetReturnValue().Set(JS_INT(0));  
   } 
   
@@ -710,10 +711,13 @@ NAN_METHOD(CreateBuffer) {
   Nan::HandleScope scope;
 
   GLuint buffer;
+
+  cout<<"createBuffer* "<<endl;
+
   glCreateBuffers(1, &buffer);
-  #ifdef LOGGING
+  //#ifdef LOGGING
   cout<<"createBuffer "<<buffer<<endl;
-  #endif
+  //#endif
   registerGLObj(GLOBJECT_TYPE_BUFFER, buffer);
   info.GetReturnValue().Set(Nan::New<Number>(buffer));
 }

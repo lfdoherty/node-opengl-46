@@ -1,0 +1,8 @@
+sudo apt-get install libglew-dev
+#NO: sudo apt-get install libglfw3-dev
+sudo apt-get install libfreeimage-dev
+sudo apt-get install libxrandr-dev libxinerama-dev libxcursor-dev libfreeimage-dev libglew-dev libxi-dev
+
+npm install -g node-gyp
+npm install --save bindings nan
+node-gyp rebuild

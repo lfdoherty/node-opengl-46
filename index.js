@@ -1,3 +1,6 @@
+
+process.env.MESA_GL_VERSION_OVERRIDE=4.6
+
 module.exports = {
     webgl: require('./lib/webgl'),
     Image: require('./lib/image'),
