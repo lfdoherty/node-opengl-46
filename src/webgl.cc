@@ -712,11 +712,11 @@ NAN_METHOD(CreateBuffer) {
 
   GLuint buffer;
 
-  cout<<"createBuffer* "<<endl;
+  //cout<<"createBuffer* "<<endl;
 
   glCreateBuffers(1, &buffer);
   //#ifdef LOGGING
-  cout<<"createBuffer "<<buffer<<endl;
+ // cout<<"createBuffer "<<buffer<<endl;
   //#endif
   registerGLObj(GLOBJECT_TYPE_BUFFER, buffer);
   info.GetReturnValue().Set(Nan::New<Number>(buffer));
@@ -2308,14 +2308,14 @@ NAN_METHOD(ClearBufferSubData) {
   GLint clearSize = Nan::To<int>(info[3]).FromJust();
   GLenum format = Nan::To<int>(info[4]).FromJust();
   GLenum type = Nan::To<int>(info[5]).FromJust();
-
+/*
   cout<<"target:"<<target<<endl;
   cout<<"internalFormat:"<<internalFormat<<endl;
   cout<<"offset:"<<offset<<endl;
   cout<<"clearSize:"<<clearSize<<endl;
   cout<<"format:"<<format<<endl;
   cout<<"type:"<<type<<endl;
-
+*/
   //int num;
   //void* ptr = getArrayData<BYTE>(info[6],&num);
   int element_size = 1;
@@ -2323,7 +2323,7 @@ NAN_METHOD(ClearBufferSubData) {
   int size = arr->ByteLength() * element_size;
   void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
 
-  cout<<"size:"<<size<<endl;
+  //cout<<"size:"<<size<<endl;
 
   glClearBufferSubData(target, internalFormat, offset, clearSize, format, type, data);
 
