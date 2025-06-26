@@ -38,6 +38,10 @@ void init(Local<Object> target)
   Nan::SetMethod(target, "uniform2i", webgl::Uniform2i);
   Nan::SetMethod(target, "uniform3i", webgl::Uniform3i);
   Nan::SetMethod(target, "uniform4i", webgl::Uniform4i);
+  Nan::SetMethod(target, "uniform1ui", webgl::Uniform1ui);
+  Nan::SetMethod(target, "uniform2ui", webgl::Uniform2ui);
+  Nan::SetMethod(target, "uniform3ui", webgl::Uniform3ui);
+  Nan::SetMethod(target, "uniform4ui", webgl::Uniform4ui);
   Nan::SetMethod(target, "uniform1fv", webgl::Uniform1fv);
   Nan::SetMethod(target, "uniform2fv", webgl::Uniform2fv);
   Nan::SetMethod(target, "uniform3fv", webgl::Uniform3fv);
@@ -46,6 +50,10 @@ void init(Local<Object> target)
   Nan::SetMethod(target, "uniform2iv", webgl::Uniform2iv);
   Nan::SetMethod(target, "uniform3iv", webgl::Uniform3iv);
   Nan::SetMethod(target, "uniform4iv", webgl::Uniform4iv);
+  Nan::SetMethod(target, "uniform1uiv", webgl::Uniform1uiv);
+  Nan::SetMethod(target, "uniform2uiv", webgl::Uniform2uiv);
+  Nan::SetMethod(target, "uniform3uiv", webgl::Uniform3uiv);
+  Nan::SetMethod(target, "uniform4uiv", webgl::Uniform4uiv);
   Nan::SetMethod(target, "pixelStorei", webgl::PixelStorei);
   Nan::SetMethod(target, "bindAttribLocation", webgl::BindAttribLocation);
   Nan::SetMethod(target, "getError", webgl::GetError);

@@ -61,7 +61,7 @@ inline Type* getArrayData(Local<Value> arg, int* num = NULL) {
     else if(arg->IsObject()) {
       Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(arg);
       if(num) *num=arr->ByteLength()/sizeof(Type);
-      data = reinterpret_cast<Type*>((uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset());
+      data = reinterpret_cast<Type*>((uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset());
     }
     else
       Nan::ThrowError("Bad array argument");
@@ -164,6 +164,16 @@ NAN_METHOD(Uniform1i) {
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
+NAN_METHOD(Uniform1ui) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  uint x = Nan::To<uint>(info[1]).FromJust();
+
+  glUniform1ui(location, x);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
 NAN_METHOD(Uniform2i) {
   Nan::HandleScope scope;
 
@@ -172,6 +182,17 @@ NAN_METHOD(Uniform2i) {
   int y = Nan::To<int>(info[2]).FromJust();
 
   glUniform2i(location, x, y);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+NAN_METHOD(Uniform2ui) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  uint x = Nan::To<uint>(info[1]).FromJust();
+  uint y = Nan::To<uint>(info[2]).FromJust();
+
+  glUniform2ui(location, x, y);
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
@@ -187,6 +208,18 @@ NAN_METHOD(Uniform3i) {
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
+NAN_METHOD(Uniform3ui) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  uint x = Nan::To<uint>(info[1]).FromJust();
+  uint y = Nan::To<uint>(info[2]).FromJust();
+  uint z = Nan::To<uint>(info[3]).FromJust();
+
+  glUniform3ui(location, x, y, z);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
 NAN_METHOD(Uniform4i) {
   Nan::HandleScope scope;
 
@@ -197,6 +230,19 @@ NAN_METHOD(Uniform4i) {
   int w = Nan::To<int>(info[4]).FromJust();
 
   glUniform4i(location, x, y, z, w);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+NAN_METHOD(Uniform4ui) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  uint x = Nan::To<uint>(info[1]).FromJust();
+  uint y = Nan::To<uint>(info[2]).FromJust();
+  uint z = Nan::To<uint>(info[3]).FromJust();
+  uint w = Nan::To<uint>(info[4]).FromJust();
+
+  glUniform4ui(location, x, y, z, w);
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
@@ -288,6 +334,52 @@ NAN_METHOD(Uniform4iv) {
   GLint *ptr=getArrayData<GLint>(info[1],&num);
   num /= 4;
   glUniform4iv(location, num, ptr);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+
+NAN_METHOD(Uniform1uiv) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  int num=0;
+  GLuint *ptr=getArrayData<GLuint>(info[1],&num);
+
+  glUniform1uiv(location, num, ptr);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+NAN_METHOD(Uniform2uiv) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  int num=0;
+  GLuint *ptr=getArrayData<GLuint>(info[1],&num);
+  num /= 2;
+
+  glUniform2uiv(location, num, ptr);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+NAN_METHOD(Uniform3uiv) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  int num=0;
+  GLuint *ptr=getArrayData<GLuint>(info[1],&num);
+  num /= 3;
+  glUniform3uiv(location, num, ptr);
+  info.GetReturnValue().Set(Nan::Undefined());
+}
+
+NAN_METHOD(Uniform4uiv) {
+  Nan::HandleScope scope;
+
+  int location = Nan::To<int>(info[0]).FromJust();
+  int num=0;
+  GLuint *ptr=getArrayData<GLuint>(info[1],&num);
+  num /= 4;
+  glUniform4uiv(location, num, ptr);
   info.GetReturnValue().Set(Nan::Undefined());
 }
 
@@ -787,7 +879,7 @@ NAN_METHOD(BufferData) {
     int element_size = 1;
     Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(obj);
     int size = arr->ByteLength() * element_size;
-    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+    void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset();
     
     glBufferData(target, size, data, usage);
   }
@@ -817,7 +909,7 @@ NAN_METHOD(BufferSubData) {
   int size = lengthBytes==0?(arr->ByteLength() * element_size):lengthBytes;
   //cout<<"size:"<<size<<endl;
   //cout<<"bytelength:"<<arr->ByteLength()<<endl;
-  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset() + srcOffsetBytes;
+  void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset() + srcOffsetBytes;
 
   glBufferSubData(target, offset, size, data);
 
@@ -2254,7 +2346,7 @@ NAN_METHOD(ClearBufferData) {
 */
   Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[4]);
   //int size = arr->ByteLength();
-  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+  void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset();
 
   //cout<<"size:"<<size<<endl;
  // cout<<"is null"<<info[4]->IsNull()<<endl;
@@ -2287,7 +2379,7 @@ NAN_METHOD(ClearNamedBufferData) {
   }else{
     Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[4]);
     //int size = arr->ByteLength();
-    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+    void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset();
 
    // cout<<"size:"<<size<<endl;
     //cout<<"is null"<<info[4]->IsNull()<<endl;
@@ -2321,7 +2413,7 @@ NAN_METHOD(ClearBufferSubData) {
   int element_size = 1;
   Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(info[6]);
   int size = arr->ByteLength() * element_size;
-  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+  void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset();
 
   //cout<<"size:"<<size<<endl;
 
@@ -2490,7 +2582,7 @@ NAN_METHOD(BufferStorage){
     Local<Object> obj = Local<Object>::Cast(info[2]);
     Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(obj);
     int size = byteSize==0?(arr->ByteLength()):byteSize;
-    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+    void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset();
 
     glBufferStorage(target, size, data, flags);
     //cout << "data buffer storage\n";
@@ -2521,7 +2613,7 @@ NAN_METHOD(NamedBufferStorage){
     Local<Object> obj = Local<Object>::Cast(info[2]);
     Local<ArrayBufferView> arr = Local<ArrayBufferView>::Cast(obj);
     int size = byteSize==0?(arr->ByteLength()):byteSize;
-    void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset();
+    void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset();
 
     glNamedBufferStorage(buf, size, data, flags);
     //cout << "data buffer storage\n";
@@ -2583,7 +2675,7 @@ NAN_METHOD(NamedBufferSubData) {
   int size = lengthBytes==0?arr->ByteLength():lengthBytes;
   //cout<<"size:"<<size<<endl;
   //cout<<"bytelength:"<<arr->ByteLength()<<endl;
-  void* data = (uint8_t*)arr->Buffer()->GetContents().Data() + arr->ByteOffset() + srcOffsetBytes;
+  void* data = (uint8_t*)arr->Buffer()->GetBackingStore()->Data() + arr->ByteOffset() + srcOffsetBytes;
 
   glNamedBufferSubData(buf, offset, size, data);
 
